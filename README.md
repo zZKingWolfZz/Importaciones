@@ -77,3 +77,22 @@ sass.compile(filename='scss/unified-theme.scss', output_style='expanded')
 sass.compile(filename='scss/dashboard.scss', output_style='expanded')
 ```
 O con Sass CLI / Node (`sass scss/main.scss css/main.css` etc., y `lessc less/estilos.less css/estilos-less.css`).
+
+---
+
+## 6. Ejecución Full-Stack con Backend Spring Boot 3 + PostgreSQL
+
+El repositorio incluye también el backend completo en Java 21 / Spring Boot 3 (`pom.xml` y `src/main/java/`):
+
+1. Configura las variables de entorno (o edita `src/main/resources/application.properties`):
+   ```bash
+   export SPRING_DATASOURCE_URL="jdbc:postgresql://127.0.0.1:5432/superhuancayo_db"
+   export SPRING_DATASOURCE_USERNAME="fleetuser"
+   export SPRING_DATASOURCE_PASSWORD="tu_password"
+   export APP_JWT_SECRET="una_clave_secreta_segura_minimo_32_caracteres"
+   ```
+2. Compila y ejecuta con Maven:
+   ```bash
+   mvn spring-boot:run
+   ```
+   *(Los archivos estáticos de `src/main/resources/static/` coinciden con la raíz del repositorio.)*

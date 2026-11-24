@@ -1,0 +1,55 @@
+.badge-base {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: calculate-rem(4px);
+    padding: calculate-rem(4px) calculate-rem(10px);
+    font-family: $fuente-titulos;
+    font-size: calculate-rem(11px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+    @include border-radius(4px);
+}
+
+.badge-oferta {
+    @extend .badge-base;
+    background-color: $azul-super;
+    color: $blanco;
+    @include transform(rotate(-2deg) skew(-4deg));
+    @include transition($transicion-rapida);
+
+    &:hover {
+        @include transform(rotate(0deg) skew(0deg));
+    }
+}
+
+.badge-destacado {
+    @extend .badge-base;
+    background-color: $azul-noche;
+    color: $blanco;
+}
+
+.badge-nuevo {
+    @extend .badge-base;
+    background-color: $azul-suave;
+    color: $azul-super;
+    border: 1px solid rgba(11, 63, 193, 0.2);
+}
+
+.badge-garantia {
+    @extend .badge-base;
+    background-color: #F8FAFC;
+    color: $texto-muted;
+    border: 1px solid $borde-color;
+}
+
+.badge-stock {
+    @extend .badge-base;
+    background-color: $azul-suave;
+    color: $azul-super;
+}

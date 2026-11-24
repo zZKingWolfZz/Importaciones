@@ -1,0 +1,815 @@
+// ==============================================================================
+// TEMA UNIFICADO CORPORATIVO - IMPORTACIONES SUPER HUANCAYO
+// Arquitectura UX retail estilo Falabella combinada con identidad oficial,
+// variables globales SASS, mixins, nesting BEM, keyframes y responsive design.
+// ==============================================================================
+
+:root {
+    --super-azul-noche: #{$azul-noche};      // Azul Noche oficial del logo
+    --super-azul-primario: #{$azul-super};   // Azul Super oficial del logo
+    --super-azul-hover: #06319c;             // Tinte azul profundo hover
+    --super-azul-suave: #{$azul-suave};      // Tinte celeste suave para fondos y hover
+    --super-azul-electrico: #1D5BFD;         // Tinte azul vibrante para acentos y badges
+    --super-azul-tag: #{$azul-noche};        // Bloques de precio y badges de descuento
+    --super-texto-oscuro: #0A192F;           // Texto principal de alto contraste
+    --super-texto-muted: #53627A;            // Texto secundario
+    --super-fondo: #F6F8FD;                  // Fondo general blanco-hielo
+    --super-blanco: #{$blanco};              // Blanco puro
+    --super-borde: #DCE5F5;                  // Borde sutil azulado
+    --super-borde-subtle: #EEF3FC;           // Separador interno
+    --super-sombra: 0 4px 16px rgba(8, 29, 90, 0.07);
+    --super-sombra-hover: 0 10px 28px rgba(8, 29, 90, 0.14);
+}
+
+// -------------------------------------------------------------
+// ANIMACIONES CSS REUTILIZABLES (@keyframes) Y UTILIDADES HERO
+// -------------------------------------------------------------
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulso {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.45);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+}
+
+.super-hero-main {
+    animation: fadeInDown 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.super-hero-side-card {
+    animation: slideInUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+        @include transform(translateY(-4px));
+        @include box-shadow(var(--super-sombra-hover));
+    }
+}
+
+.super-delay-1 {
+    animation-delay: 0.14s;
+}
+
+.super-delay-2 {
+    animation-delay: 0.28s;
+}
+
+.super-promo-strip {
+    animation: slideInUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+.super-cta-pulso {
+    animation: pulso 2.2s ease-in-out infinite;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    &:hover {
+        @include transform(translateY(-2px));
+    }
+}
+
+// -------------------------------------------------------------
+// 1. TOPBAR CORPORATIVO UNIFICADO
+// -------------------------------------------------------------
+.super-topbar {
+    background-color: var(--super-azul-noche);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: calculate-rem(12px);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    span,
+    a {
+        white-space: nowrap;
+    }
+
+    a {
+        color: rgba(255, 255, 255, 0.92);
+        text-decoration: none;
+        @include transition(color 0.15s ease);
+
+        &:hover {
+            color: $blanco;
+        }
+    }
+}
+
+.super-location-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: $blanco;
+    font-weight: 500;
+}
+
+// -------------------------------------------------------------
+// 2. HEADER PRINCIPAL UNIFICADO (LOGO OFICIAL, MENÚ, BUSCADOR)
+// -------------------------------------------------------------
+.super-main-header {
+    background-color: $blanco;
+    border-bottom: 1px solid var(--super-borde);
+    padding: 10px 0;
+}
+
+.super-brand-logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+
+    img {
+        height: 58px;
+        width: auto;
+        object-fit: contain;
+
+        @include responsive-max(767.98px) {
+            height: 44px;
+        }
+    }
+}
+
+.super-menu-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: calculate-rem(14px);
+    font-weight: 700;
+    color: var(--super-azul-noche);
+    background-color: var(--super-azul-suave);
+    border: 1px solid rgba(11, 63, 193, 0.15);
+    padding: 8px 16px;
+    @include border-radius(8px);
+    cursor: pointer;
+    @include transition($transicion-rapida);
+    text-decoration: none;
+
+    &:hover {
+        background-color: #dce7fc;
+        color: var(--super-azul-primario);
+    }
+}
+
+.super-search-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.super-search-input {
+    width: 100%;
+    height: 44px;
+    @include border-radius(25px);
+    border: 2px solid var(--super-azul-noche);
+    padding: 8px 50px 8px 20px;
+    font-size: calculate-rem(14px);
+    outline: none;
+    background-color: $blanco;
+    @include transition($transicion-rapida);
+
+    &:focus {
+        border-color: var(--super-azul-primario);
+        @include box-shadow(0 0 0 3px rgba(11, 63, 193, 0.15));
+    }
+}
+
+.super-search-btn {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    width: 36px;
+    height: 36px;
+    background-color: var(--super-azul-noche);
+    border: none;
+    @include border-radius(50%);
+    @include flex-center;
+    color: $blanco;
+    cursor: pointer;
+    @include transition(background-color 0.2s ease);
+
+    &:hover {
+        background-color: var(--super-azul-primario);
+    }
+}
+
+.super-user-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+}
+
+.super-user-card {
+    text-decoration: none;
+    color: var(--super-azul-noche);
+    @include flex-column;
+    line-height: 1.2;
+
+    &:hover {
+        color: var(--super-azul-primario);
+    }
+}
+
+.super-user-name {
+    font-size: calculate-rem(13px);
+    font-weight: 700;
+}
+
+.super-user-sub {
+    font-size: calculate-rem(11px);
+    color: var(--super-texto-muted);
+}
+
+.super-cart-btn {
+    position: relative;
+    color: var(--super-azul-noche);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    padding: 4px;
+    @include transition(color 0.2s ease);
+
+    &:hover {
+        color: var(--super-azul-primario);
+    }
+}
+
+.super-cart-badge {
+    position: absolute;
+    top: -4px;
+    right: -6px;
+    background-color: var(--super-azul-primario);
+    color: $blanco;
+    font-size: calculate-rem(10px);
+    font-weight: 800;
+    @include border-radius(50%);
+    width: 18px;
+    height: 18px;
+    @include flex-center;
+    border: 2px solid $blanco;
+}
+
+// -------------------------------------------------------------
+// 3. CINTA INFORMATIVA EXPRESS
+// -------------------------------------------------------------
+.super-express-strip {
+    background: linear-gradient(90deg, $azul-noche 0%, $azul-super 100%);
+    color: $blanco;
+    padding: 7px 0;
+    font-size: calculate-rem(12px);
+    text-align: center;
+}
+
+.super-express-badge {
+    background-color: $blanco;
+    color: var(--super-azul-noche);
+    font-weight: 800;
+    padding: 2px 8px;
+    @include border-radius(4px);
+    font-size: calculate-rem(11px);
+    margin: 0 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+// -------------------------------------------------------------
+// 4. TABS HORIZONTALES UNIFICADAS (DEPARTAMENTOS Y PÁGINAS)
+// -------------------------------------------------------------
+.super-nav-tabs {
+    background-color: $blanco;
+    border-bottom: 2px solid var(--super-borde);
+    @include box-shadow(0 2px 4px rgba(8, 29, 90, 0.02));
+}
+
+.super-tabs-container {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.super-tab-item {
+    border-right: 1px solid var(--super-borde-subtle);
+    flex-shrink: 0;
+
+    &:last-child {
+        border-right: none;
+    }
+
+    &.active {
+        .super-tab-link {
+            border-bottom-color: var(--super-azul-primario);
+            color: var(--super-azul-primario);
+            font-weight: 700;
+        }
+    }
+}
+
+.super-tab-link {
+    display: block;
+    padding: 11px 13px;
+    font-size: calculate-rem(13px);
+    font-weight: 600;
+    color: var(--super-texto-oscuro);
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    @include transition($transicion-rapida);
+
+    &:hover {
+        color: var(--super-azul-primario);
+        background-color: var(--super-azul-suave);
+    }
+}
+
+.super-tab-dashboard-btn {
+    background-color: var(--super-azul-suave);
+    color: var(--super-azul-noche) !important;
+    font-weight: 700 !important;
+    @include border-radius(6px);
+    margin: 4px 8px;
+    border-bottom: none !important;
+
+    &:hover {
+        background-color: #d7e4fc !important;
+        color: var(--super-azul-primario) !important;
+    }
+}
+
+// -------------------------------------------------------------
+// 5. TÍTULOS CORPORATIVOS CON EL PUNTO AZUL SUPER (.)
+// -------------------------------------------------------------
+.super-section-title {
+    font-family: $fuente-titulos;
+    font-size: calculate-rem(24px);
+    font-weight: 800;
+    color: var(--super-azul-noche);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+
+    .super-dot {
+        color: var(--super-azul-primario);
+    }
+
+    @include responsive-max(767.98px) {
+        font-size: calculate-rem(20px);
+    }
+}
+
+.super-section-sub {
+    font-size: calculate-rem(14px);
+    color: var(--super-texto-muted);
+    margin-bottom: 24px;
+}
+
+// -------------------------------------------------------------
+// 6. CARDS VERTICALES DE CATEGORÍA
+// -------------------------------------------------------------
+.super-cat-vertical-card {
+    position: relative;
+    height: 270px;
+    @include border-radius(10px);
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+    background-color: var(--super-azul-noche);
+    @include box-shadow(var(--super-sombra));
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    @include responsive-max(767.98px) {
+        height: 210px;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.82;
+        transition: transform 0.4s ease, opacity 0.3s ease;
+    }
+
+    &:hover {
+        @include transform(translateY(-4px));
+        @include box-shadow(var(--super-sombra-hover));
+
+        img {
+            @include transform(scale(1.06));
+            opacity: 0.94;
+        }
+    }
+}
+
+.super-cat-vertical-badge {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    right: 14px;
+    color: $blanco;
+    font-size: calculate-rem(14px);
+    font-weight: 800;
+    text-transform: uppercase;
+    text-shadow: 0 2px 8px rgba(8, 29, 90, 0.8);
+
+    .super-dot {
+        color: var(--super-azul-primario);
+    }
+}
+
+// -------------------------------------------------------------
+// 7. TARJETAS DE PRODUCTO CON BLOQUE INFERIOR RETAIL
+// -------------------------------------------------------------
+.super-product-card {
+    background: $blanco;
+    border: 1px solid var(--super-borde);
+    @include border-radius(10px);
+    overflow: hidden;
+    @include flex-column;
+    height: 100%;
+    @include box-shadow(var(--super-sombra));
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+
+    &:hover {
+        @include transform(translateY(-3px));
+        @include box-shadow(var(--super-sombra-hover));
+        border-color: var(--super-azul-primario);
+
+        .super-product-img-box img {
+            @include transform(scale(1.05));
+        }
+    }
+}
+
+.super-product-img-box {
+    height: 210px;
+    width: 100%;
+    @include flex-center;
+    background-color: $blanco;
+    padding: 16px;
+    position: relative;
+
+    @include responsive-max(767.98px) {
+        height: 175px;
+    }
+
+    img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        @include transition(transform 0.3s ease);
+    }
+}
+
+.super-product-tag-discount {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: var(--super-azul-primario);
+    color: $blanco;
+    font-size: calculate-rem(11px);
+    font-weight: 800;
+    padding: 2px 8px;
+    @include border-radius(4px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.super-product-bottom {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    border-top: 1px solid var(--super-borde-subtle);
+    background-color: $blanco;
+    min-height: 82px;
+    flex-grow: 1;
+}
+
+.super-product-info {
+    padding: 10px 12px;
+    @include flex-column;
+    justify-content: center;
+    min-width: 0;
+}
+
+.super-product-brand {
+    font-size: calculate-rem(11px);
+    font-weight: 800;
+    color: var(--super-azul-noche);
+    text-transform: uppercase;
+}
+
+.super-product-name {
+    font-size: calculate-rem(12.5px);
+    color: var(--super-texto-oscuro);
+    margin: 2px 0 0 0;
+    line-height: 1.35;
+    word-break: break-word;
+}
+
+.super-product-price-block {
+    background-color: var(--super-azul-noche);
+    color: $blanco;
+    padding: 10px 12px;
+    @include flex-column;
+    @include flex-center;
+    text-align: center;
+    font-weight: 800;
+    font-size: calculate-rem(15px);
+    min-width: 96px;
+    line-height: 1.1;
+    border-left: 2px solid var(--super-azul-primario);
+
+    @include responsive-max(767.98px) {
+        min-width: 82px;
+        font-size: calculate-rem(13.5px);
+    }
+
+    &.accent {
+        background-color: var(--super-azul-primario);
+        color: $blanco;
+    }
+}
+
+.super-product-actions {
+    display: flex;
+    gap: 8px;
+    padding: 10px 12px;
+    border-top: 1px solid var(--super-borde-subtle);
+    background-color: #F9FBFF;
+}
+
+// -------------------------------------------------------------
+// 8. UTILIDADES BOOTSTRAP / OVERLAYS / CONTRASTE
+// -------------------------------------------------------------
+select.form-select {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+}
+
+.wsp-flotante {
+    z-index: 1030 !important;
+}
+
+#superCartDrawer {
+    z-index: 1060 !important;
+}
+
+.contacto-mapa-box {
+    background-color: $azul-suave !important;
+}
+
+// Contraste mejorado y limpieza en footer y toast
+.super-unified-footer {
+    background-color: var(--super-azul-noche);
+    color: $blanco;
+    padding: 50px 0 20px;
+    margin-top: 60px;
+    border-top: 4px solid var(--super-azul-primario);
+
+    p,
+    address {
+        color: rgba(255, 255, 255, 0.88) !important;
+    }
+
+    a {
+        color: rgba(255, 255, 255, 0.88);
+        text-decoration: none;
+        @include transition(color 0.15s ease);
+
+        &:hover {
+            color: $blanco;
+            text-decoration: underline;
+        }
+    }
+}
+
+.toast-container {
+    bottom: 90px !important;
+}
+
+.super-footer-logo-box {
+    margin-bottom: 16px;
+
+    img {
+        height: 52px;
+        width: auto;
+        background: $blanco;
+        padding: 6px 12px;
+        @include border-radius(6px);
+    }
+}
+
+.super-footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: 20px;
+    margin-top: 40px;
+    font-size: calculate-rem(13px);
+    color: rgba(255, 255, 255, 0.65);
+}
+
+// Eliminación estética de barras de desplazamiento toscas en navegación
+.super-nav-tabs,
+.super-nav-tabs .container,
+.super-tabs-container,
+.super-category-nav,
+.categories-scroll {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+
+    &::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+}
+
+// ==============================================================================
+// RESPONSIVE GLOBAL (MÓVIL < 576px, TABLET < 768px / < 992px)
+// ==============================================================================
+html,
+body {
+    overflow-x: clip;
+}
+
+@include responsive-max(767.98px) {
+    .super-topbar {
+        font-size: calculate-rem(11px);
+        padding: 5px 0;
+
+        span,
+        a {
+            white-space: normal;
+        }
+    }
+
+    .super-location-badge {
+        line-height: 1.25;
+    }
+
+    .super-main-header {
+        padding: 8px 0;
+    }
+
+    .super-tab-link {
+        padding: 9px 11px;
+        font-size: calculate-rem(12.5px);
+    }
+
+    .super-express-strip {
+        font-size: calculate-rem(11.5px);
+        padding: 6px 8px;
+        line-height: 1.45;
+    }
+
+    .super-hero-main {
+        min-height: auto !important;
+        padding: 1.5rem !important;
+    }
+
+    .super-promo-strip {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 0.75rem !important;
+    }
+
+    .super-unified-footer {
+        padding: 36px 0 18px;
+        margin-top: 40px;
+    }
+
+    .super-footer-bottom {
+        margin-top: 24px;
+        padding-top: 16px;
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+}
+
+@include responsive-max(575.98px) {
+    .super-search-input {
+        height: 40px;
+        font-size: calculate-rem(13px);
+        padding: 6px 44px 6px 14px;
+    }
+
+    .super-search-btn {
+        width: 32px;
+        height: 32px;
+    }
+
+    .super-user-actions {
+        gap: 8px;
+    }
+
+    .super-product-img-box {
+        height: 145px;
+        padding: 10px;
+    }
+
+    .super-product-bottom {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .super-product-info {
+        padding: 8px 10px;
+    }
+
+    .super-product-price-block {
+        border-left: none;
+        border-top: 2px solid var(--super-azul-primario);
+        min-width: 0;
+        width: 100%;
+        padding: 6px 10px;
+        flex-direction: row;
+        gap: 6px;
+        font-size: calculate-rem(13.5px);
+    }
+
+    .super-product-actions {
+        flex-direction: column;
+        gap: 6px;
+        padding: 8px 10px;
+
+        .btn {
+            width: 100%;
+            font-size: calculate-rem(12px);
+            padding: 6px 8px;
+        }
+    }
+
+    .super-cat-vertical-card {
+        height: 185px !important;
+    }
+
+    .super-cat-vertical-badge {
+        font-size: calculate-rem(12.5px);
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+    }
+
+    .wsp-flotante {
+        width: 50px !important;
+        height: 50px !important;
+        bottom: 16px !important;
+        right: 16px !important;
+
+        svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .wsp-flotante__tooltip {
+            display: none !important;
+        }
+    }
+
+    .toast-container {
+        bottom: 76px !important;
+        left: 12px;
+        right: 12px;
+    }
+}
+
+// Accesibilidad: respetar preferencias de movimiento reducido
+@media (prefers-reduced-motion: reduce) {
+    .super-hero-main,
+    .super-hero-side-card,
+    .super-promo-strip,
+    .super-cta-pulso {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .super-cat-vertical-card,
+    .super-product-card {
+        transition: none !important;
+    }
+}

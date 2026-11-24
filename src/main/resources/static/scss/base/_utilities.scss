@@ -1,0 +1,47 @@
+@each $nombre, $color in $colores {
+    .bg-#{$nombre} {
+        background-color: $color !important;
+    }
+
+    .text-#{$nombre} {
+        color: $color !important;
+    }
+
+    .border-#{$nombre} {
+        border-color: $color !important;
+    }
+}
+
+@for $i from 1 through 8 {
+    .delay-#{$i} {
+        -webkit-animation-delay: #{$i * 0.15}s !important;
+        animation-delay: #{$i * 0.15}s !important;
+    }
+
+    .anim-stagger > *:nth-child(#{$i}) {
+        -webkit-animation-delay: #{$i * 0.12}s;
+        animation-delay: #{$i * 0.12}s;
+    }
+}
+
+.u-text-center { text-align: center !important; }
+.u-text-left   { text-align: left !important; }
+.u-text-right  { text-align: right !important; }
+
+.u-mb-0 { margin-bottom: 0 !important; }
+.u-mb-1 { margin-bottom: calculate-rem(8px) !important; }
+.u-mb-2 { margin-bottom: calculate-rem(16px) !important; }
+.u-mb-3 { margin-bottom: calculate-rem(24px) !important; }
+.u-mb-4 { margin-bottom: calculate-rem(32px) !important; }
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

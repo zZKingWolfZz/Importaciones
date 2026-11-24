@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Panel ERP Administrativo Comercial - Importaciones Super Huancayo. Control de pedidos, inventario, facturación SUNAT, atención al cliente y personal.">
+    <meta name="theme-color" content="#081D5A">
+
+    <title>Panel Administrativo ERP | Importaciones Super Huancayo</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Estilos Principales del Sitio y Tema Unificado -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/unified-theme.css?v=20261124">
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <!-- Chart.js para Analítica de Ventas -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        .erp-login-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(8, 29, 90, 0.95);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .erp-kpi-card {
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            padding: 1.25rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            transition: transform 0.2s;
+        }
+        .erp-kpi-card:hover {
+            transform: translateY(-2px);
+        }
+        .nav-pills .nav-link {
+            color: #475569;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+        }
+        .nav-pills .nav-link.active {
+            background-color: #081D5A;
+            color: #fff;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #f8fafc;
+        }
+        .badge-entregado { background-color: #10b981; }
+        .badge-pendiente { background-color: #f59e0b; color: #000; }
+        .badge-en-camino { background-color: #3b82f6; }
+        .badge-confirmado { background-color: #06b6d4; }
+        .badge-cancelado { background-color: #ef4444; }
+        @media (max-width: 767.98px) {
+            .nav-pills {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                white-space: nowrap;
+                scrollbar-width: none;
+                padding-bottom: 4px;
+            }
+            .nav-pills::-webkit-scrollbar {
+                display: none;
+            }
+            .nav-pills .nav-link {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.85rem;
+            }
+            .erp-kpi-card {
+                padding: 0.9rem;
+            }
+            .card-header .form-control,
+            .card-header .form-select {
+                width: 100% !important;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+    <!-- =========================================================
+         GATE DE AUTENTICACIÓN / LOGIN OVERLAY PARA PERSONAL
+         ========================================================= -->
+    <div id="adminLoginOverlay" class="erp-login-overlay d-none">
+        <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5 bg-white" style="max-width: 440px; width: 90%;">
+            <div class="text-center mb-4">
+                <img src="assets/img/logo.png" alt="Importaciones Super Huancayo" height="42" class="mb-3">
+                <h4 class="fw-bold text-dark mb-1">Acceso ERP Corporativo</h4>
+                <p class="text-muted small mb-0">Solo personal autorizado (Administrador / Vendedor)</p>
+            </div>
+
+            <div id="adminLoginErr" class="alert alert-danger small d-none" role="alert"></div>
+
+            <form id="adminLoginForm">
+                <div class="mb-3">
+                    <label for="erpUser" class="form-label small fw-semibold">Usuario o Correo Institucional</label>
+                    <input type="text" id="erpUser" class="form-control" placeholder="admin o vendedor" required autofocus>
+                </div>
+                <div class="mb-3">
+                    <label for="erpPass" class="form-label small fw-semibold">Contraseña Segura</label>
+                    <input type="password" id="erpPass" class="form-control" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 fw-bold shadow-sm">
+                    Ingresar al Panel ERP
+                </button>
+            </form>
+
+            <div class="mt-4 pt-3 border-top text-center">
+                <a href="index.html" class="text-decoration-none small text-muted">← Volver a la Tienda Pública</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         CONTENIDO PRINCIPAL DEL ERP BACKOFFICE
+         ========================================================= -->
+    <div id="erpMainContent">
+
+        <!-- HEADER DEL ERP -->
+        <header class="super-main-header border-bottom bg-white shadow-sm sticky-top" style="z-index: 1020;">
+            <div class="container-fluid px-4 py-2">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-3">
+                        <a href="index.html" class="super-brand-logo">
+                            <img src="assets/img/logo.png" alt="Importaciones Super" height="36">
+                        </a>
+                        <span class="badge bg-primary text-uppercase px-2 py-1 fs-7 fw-bold">Backoffice ERP 2026</span>
+                        <a href="index.html" class="btn btn-outline-secondary btn-sm rounded-pill d-none d-md-inline-block">
+                            🏪 Ver Tienda Pública
+                        </a>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-1 rounded-pill fw-semibold" id="adminBadgeName">
+                                Sesión Activa
+                            </span>
+                        </div>
+                        <button type="button" id="btnAdminLogout" class="btn btn-outline-danger btn-sm rounded-pill fw-semibold">
+                            Cerrar Sesión
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SUBBAR CON PESTAÑAS DEL ERP -->
+        <div class="bg-white border-bottom py-2 shadow-xs mb-4">
+            <div class="container-fluid px-4">
+                <ul class="nav nav-pills gap-2 flex-nowrap overflow-x-auto pb-1" id="erpTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="tabBtnResumen" data-bs-toggle="pill" data-bs-target="#tabPaneResumen" type="button" role="tab">
+                            📊 Resumen Ejecutivo
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tabBtnPedidos" data-bs-toggle="pill" data-bs-target="#tabPanePedidos" type="button" role="tab">
+                            📦 Pedidos & Ventas
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tabBtnProductos" data-bs-toggle="pill" data-bs-target="#tabPaneProductos" type="button" role="tab">
+                            🏷️ Inventario & Productos
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tabBtnSoporte" data-bs-toggle="pill" data-bs-target="#tabPaneSoporte" type="button" role="tab">
+                            💬 Consultas & Reclamos
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tabBtnEmpleados" data-bs-toggle="pill" data-bs-target="#tabPaneEmpleados" type="button" role="tab">
+                            👥 Personal & Empleados
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tabBtnUsuariosAuditoria" data-bs-toggle="pill" data-bs-target="#tabPaneUsuariosAuditoria" type="button" role="tab">
+                            🛡️ Usuarios & Auditoría
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container-fluid px-4 pb-5">
+            <div class="tab-content" id="erpTabsContent">
+
+                <!-- TAB 1: RESUMEN EJECUTIVO (KPIS Y CHART.JS) -->
+                <div class="tab-pane fade show active" id="tabPaneResumen" role="tabpanel">
+                    
+                    <!-- KPI CARDS -->
+                    <div class="row g-3 mb-4">
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="erp-kpi-card border-start border-4 border-success">
+                                <span class="text-muted small fw-semibold text-uppercase">Ingresos Totales (SUNAT)</span>
+                                <h3 class="fw-black text-dark my-1" id="erpKpiIngresos">S/ 0.00</h3>
+                                <small class="text-success fw-semibold" id="erpKpiIngresos7d">Últimos 7 días: S/ 0.00</small>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="erp-kpi-card border-start border-4 border-warning">
+                                <span class="text-muted small fw-semibold text-uppercase">Pedidos Pendientes</span>
+                                <h3 class="fw-black text-dark my-1" id="erpKpiPendientes">0</h3>
+                                <small class="text-muted" id="erpKpiTotalPedidos">de 0 pedidos totales</small>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="erp-kpi-card border-start border-4 border-danger">
+                                <span class="text-muted small fw-semibold text-uppercase">Stock Crítico (&le; 4)</span>
+                                <h3 class="fw-black text-danger my-1" id="erpKpiStockBajo">0</h3>
+                                <small class="text-muted" id="erpKpiTotalProductos">de 0 SKUs activos</small>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="erp-kpi-card border-start border-4 border-info">
+                                <span class="text-muted small fw-semibold text-uppercase">Atención al Cliente</span>
+                                <h3 class="fw-black text-dark my-1" id="erpKpiSoporte">0</h3>
+                                <small class="text-muted" id="erpKpiSoporteSub">0 consultas / 0 reclamos</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GRÁFICOS ANALÍTICOS -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-lg-8">
+                            <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                                <h5 class="fw-bold text-dark mb-3">📈 Ventas Recientes por Fecha</h5>
+                                <div style="height: 280px; position: relative;">
+                                    <canvas id="erpChartVentas"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                                <h5 class="fw-bold text-dark mb-3">📊 Distribución de Estados</h5>
+                                <div style="height: 280px; position: relative;">
+                                    <canvas id="erpChartEstados"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- TAB 2: GESTIÓN DE PEDIDOS Y VENTAS -->
+                <div class="tab-pane fade" id="tabPanePedidos" role="tabpanel">
+                    <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+                            <div>
+                                <h5 class="fw-bold text-dark mb-1">Control de Pedidos y Despachos</h5>
+                                <p class="text-muted small mb-0">Gestión de estados comerciales, facturación SUNAT y entrega en Huancayo</p>
+                            </div>
+
+                            <div class="d-flex flex-wrap gap-2">
+                                <select id="filtroEstadoPedido" class="form-select form-select-sm" style="width: auto;">
+                                    <option value="ALL">Todos los Estados</option>
+                                    <option value="PENDIENTE">PENDIENTE</option>
+                                    <option value="CONFIRMADO">CONFIRMADO</option>
+                                    <option value="EN_PREPARACION">EN_PREPARACION</option>
+                                    <option value="EN_CAMINO">EN_CAMINO</option>
+                                    <option value="ENTREGADO">ENTREGADO</option>
+                                    <option value="CANCELADO">CANCELADO</option>
+                                </select>
+                                <input type="search" id="filtroTextoPedido" class="form-control form-control-sm" placeholder="Buscar por código, cliente o DNI..." style="width: 250px;">
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="table-light small text-uppercase">
+                                    <tr>
+                                        <th>Código</th>
+                                        <th>Fecha</th>
+                                        <th>Cliente / Documento</th>
+                                        <th>Entrega</th>
+                                        <th>Total</th>
+                                        <th>Pago</th>
+                                        <th>Estado</th>
+                                        <th class="text-end">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyPedidosERP" class="small">
+                                    <!-- Renderizado por dashboard.js -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: INVENTARIO Y PRODUCTOS -->
+                <div class="tab-pane fade" id="tabPaneProductos" role="tabpanel">
+                    <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+                            <div>
+                                <h5 class="fw-bold text-dark mb-1">Catálogo e Inventario en Tiempo Real</h5>
+                                <p class="text-muted small mb-0">Gestión de SKUs, control de stock crítico, precios con descuento y fichas técnicas</p>
+                            </div>
+
+                            <div class="d-flex flex-wrap gap-2">
+                                <select id="filtroCatERP" class="form-select form-select-sm" style="width: auto;">
+                                    <option value="ALL">Todas las Categorías</option>
+                                    <option value="audio">Audio y Parlantes</option>
+                                    <option value="accesorios">Smartwatches</option>
+                                    <option value="computo">Cómputo & Periféricos</option>
+                                    <option value="telefonia">Telefonía & GaN</option>
+                                    <option value="hogar">Hogar Inteligente</option>
+                                </select>
+                                <input type="search" id="filtroProductoERP" class="form-control form-control-sm" placeholder="Buscar por SKU, nombre o marca..." style="width: 220px;">
+                                <button type="button" id="btnNuevoProductoERP" class="btn btn-primary btn-sm rounded-pill fw-semibold">
+                                    ➕ Nuevo Producto
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="table-light small text-uppercase">
+                                    <tr>
+                                        <th>SKU / Img</th>
+                                        <th>Producto y Marca</th>
+                                        <th>Categoría</th>
+                                        <th>Precio</th>
+                                        <th>Stock</th>
+                                        <th>Estado</th>
+                                        <th class="text-end">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyProductosERP" class="small">
+                                    <!-- Renderizado por dashboard.js -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 4: ATENCIÓN AL CLIENTE, CONSULTAS Y RECLAMOS -->
+                <div class="tab-pane fade" id="tabPaneSoporte" role="tabpanel">
+                    <div class="row g-4">
+                        <!-- CONSULTAS -->
+                        <div class="col-lg-6">
+                            <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100">
+                                <h5 class="fw-bold text-dark mb-3">✉️ Consultas Comerciales</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle small">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Fecha / Contacto</th>
+                                                <th>Asunto / Mensaje</th>
+                                                <th>Estado</th>
+                                                <th class="text-end">Acción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyConsultasERP">
+                                            <!-- Renderizado por dashboard.js -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- RECLAMOS INDECOPI -->
+                        <div class="col-lg-6">
+                            <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100">
+                                <h5 class="fw-bold text-dark mb-3">⚖️ Libro de Reclamaciones (INDECOPI)</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle small">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Código / Fecha</th>
+                                                <th>Reclamante</th>
+                                                <th>Tipo / Detalle</th>
+                                                <th>Estado</th>
+                                                <th class="text-end">Acción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyReclamosERP">
+                                            <!-- Renderizado por dashboard.js -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 5: PERSONAL Y EMPLEADOS (PRÁCTICA CALIFICADA 14) -->
+                <div class="tab-pane fade" id="tabPaneEmpleados" role="tabpanel">
+                    <div class="row g-4">
+                        <!-- FORMULARIO EMPLEADO -->
+                        <div class="col-lg-4">
+                            <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                                <h5 class="fw-bold text-dark mb-3" id="formEmpleadoTitulo">Registrar Nuevo Empleado</h5>
+                                <form id="formEmpleado">
+                                    <div class="mb-2">
+                                        <label for="dni" class="form-label small fw-semibold">DNI (8 dígitos) <span class="text-danger">*</span></label>
+                                        <input type="text" id="dni" class="form-control form-control-sm" maxlength="8" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="apellidos" class="form-label small fw-semibold">Apellidos <span class="text-danger">*</span></label>
+                                        <input type="text" id="apellidos" class="form-control form-control-sm" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="nombres" class="form-label small fw-semibold">Nombres <span class="text-danger">*</span></label>
+                                        <input type="text" id="nombres" class="form-control form-control-sm" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="correo" class="form-label small fw-semibold">Correo Institucional <span class="text-danger">*</span></label>
+                                        <input type="email" id="correo" class="form-control form-control-sm" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="telefono" class="form-label small fw-semibold">Teléfono <span class="text-danger">*</span></label>
+                                        <input type="tel" id="telefono" class="form-control form-control-sm" maxlength="9" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="especialidad" class="form-label small fw-semibold">Especialidad / Cargo <span class="text-danger">*</span></label>
+                                        <select id="especialidad" class="form-select form-select-sm" required>
+                                            <option value="">Selecciona especialidad...</option>
+                                            <option value="Soporte Técnico">Soporte Técnico</option>
+                                            <option value="Ventas Presenciales">Ventas Presenciales</option>
+                                            <option value="Despacho y Almacén">Despacho y Almacén</option>
+                                            <option value="Administración">Administración</option>
+                                            <option value="Marketing Digital">Marketing Digital</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="direccion" class="form-label small fw-semibold">Dirección</label>
+                                        <input type="text" id="direccion" class="form-control form-control-sm" placeholder="Av. / Jr. Huancayo">
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        <button type="submit" id="btnGuardarEmpleado" class="btn btn-primary btn-sm w-100 rounded-pill fw-semibold">
+                                            Guardar
+                                        </button>
+                                        <button type="button" id="btnCancelarEdicion" class="btn btn-light btn-sm rounded-pill d-none">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- LISTA DE EMPLEADOS -->
+                        <div class="col-lg-8">
+                            <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                                <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2 mb-3">
+                                    <h5 class="fw-bold text-dark mb-0">Nómina de Empleados Activos</h5>
+                                    <div class="d-flex gap-2">
+                                        <input type="search" id="filtroEmpleado" class="form-control form-control-sm" placeholder="Filtrar por DNI, nombre o cargo..." style="width: 220px;">
+                                        <button type="button" id="btnExportarCSV" class="btn btn-outline-secondary btn-sm" title="Exportar CSV">📥 CSV</button>
+                                        <button type="button" id="btnImprimirLista" class="btn btn-outline-secondary btn-sm" title="Imprimir">🖨️</button>
+                                        <button type="button" id="btnRestablecerPorDefecto" class="btn btn-outline-danger btn-sm" title="Restablecer plantilla inicial">↺</button>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle small">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>DNI</th>
+                                                <th>Apellidos y Nombres</th>
+                                                <th>Contacto</th>
+                                                <th>Especialidad</th>
+                                                <th class="text-end">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyEmpleados">
+                                            <!-- Renderizado dinámicamente -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 6: USUARIOS Y AUDITORÍA DE SEGURIDAD (SOLO ADMIN) -->
+                <div class="tab-pane fade" id="tabPaneUsuariosAuditoria" role="tabpanel">
+                    <div class="row g-4">
+                        <!-- CREACIÓN DE USUARIO -->
+                        <div class="col-lg-4">
+                            <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                                <h5 class="fw-bold text-dark mb-3">➕ Registrar Usuario del Sistema</h5>
+                                <form id="formNuevoUsuarioERP">
+                                    <div class="mb-2">
+                                        <label for="erpNewUsername" class="form-label small fw-semibold">Nombre de Usuario <span class="text-danger">*</span></label>
+                                        <input type="text" id="erpNewUsername" class="form-control form-control-sm" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="erpNewNombre" class="form-label small fw-semibold">Nombre Completo <span class="text-danger">*</span></label>
+                                        <input type="text" id="erpNewNombre" class="form-control form-control-sm" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="erpNewEmail" class="form-label small fw-semibold">Correo Electrónico <span class="text-danger">*</span></label>
+                                        <input type="email" id="erpNewEmail" class="form-control form-control-sm" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="erpNewPass" class="form-label small fw-semibold">Contraseña Inicial <span class="text-danger">*</span></label>
+                                        <input type="password" id="erpNewPass" class="form-control form-control-sm" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="erpNewRol" class="form-label small fw-semibold">Rol del Sistema <span class="text-danger">*</span></label>
+                                        <select id="erpNewRol" class="form-select form-select-sm" required>
+                                            <option value="CLIENTE">CLIENTE</option>
+                                            <option value="VENDEDOR">VENDEDOR</option>
+                                            <option value="ADMIN">ADMINISTRADOR</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-sm w-100 rounded-pill fw-semibold">
+                                        Crear Usuario
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- TABLA DE USUARIOS Y AUDITORÍA -->
+                        <div class="col-lg-8">
+                            <div class="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4">
+                                <h5 class="fw-bold text-dark mb-3">👥 Cuentas de Usuario Registradas</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle small">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Usuario</th>
+                                                <th>Nombre</th>
+                                                <th>Email</th>
+                                                <th>Rol</th>
+                                                <th>Estado</th>
+                                                <th class="text-end">Acción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyUsuariosERP">
+                                            <!-- Renderizado por dashboard.js -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                                <h5 class="fw-bold text-dark mb-3">🛡️ Registro de Auditoría de Seguridad</h5>
+                                <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                                    <table class="table table-hover align-middle small">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Fecha / Hora</th>
+                                                <th>Usuario</th>
+                                                <th>Acción</th>
+                                                <th>Detalle</th>
+                                                <th>IP</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyAuditoriaERP">
+                                            <!-- Renderizado por dashboard.js -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- =========================================================
+         MODALES DE EDICIÓN Y GESTIÓN
+         ========================================================= -->
+
+    <!-- MODAL DETALLE PEDIDO -->
+    <div class="modal fade" id="modalDetallePedidoERP" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="modalDetallePedidoTitulo">Detalle del Pedido</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4" id="modalDetallePedidoCuerpo">
+                    <!-- Contenido dinámico -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PRODUCTO (CREAR / EDITAR) -->
+    <div class="modal fade" id="modalProductoERP" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="modalProductoTitulo">Gestionar Producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="formProductoERP">
+                    <input type="hidden" id="prodModalId">
+                    <div class="modal-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label for="prodModalSku" class="form-label small fw-semibold">SKU <span class="text-danger">*</span></label>
+                                <input type="text" id="prodModalSku" class="form-control form-control-sm text-uppercase" placeholder="ISH-XXX-000" required>
+                            </div>
+                            <div class="col-md-8">
+                                <label for="prodModalNombre" class="form-label small fw-semibold">Nombre Comercial <span class="text-danger">*</span></label>
+                                <input type="text" id="prodModalNombre" class="form-control form-control-sm" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="prodModalMarca" class="form-label small fw-semibold">Marca <span class="text-danger">*</span></label>
+                                <input type="text" id="prodModalMarca" class="form-control form-control-sm" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="prodModalCat" class="form-label small fw-semibold">Categoría <span class="text-danger">*</span></label>
+                                <select id="prodModalCat" class="form-select form-select-sm" required>
+                                    <option value="audio">audio</option>
+                                    <option value="accesorios">accesorios</option>
+                                    <option value="computo">computo</option>
+                                    <option value="telefonia">telefonia</option>
+                                    <option value="hogar">hogar</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="prodModalStock" class="form-label small fw-semibold">Stock Físico <span class="text-danger">*</span></label>
+                                <input type="number" id="prodModalStock" class="form-control form-control-sm" min="0" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="prodModalPrecio" class="form-label small fw-semibold">Precio Regular (S/) <span class="text-danger">*</span></label>
+                                <input type="number" id="prodModalPrecio" class="form-control form-control-sm" step="0.01" min="0" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="prodModalPrecioDesc" class="form-label small fw-semibold">Precio Oferta (S/ - Opcional)</label>
+                                <input type="number" id="prodModalPrecioDesc" class="form-control form-control-sm" step="0.01" min="0">
+                            </div>
+                            <div class="col-12">
+                                <label for="prodModalImg" class="form-label small fw-semibold">URL de la Imagen <span class="text-danger">*</span></label>
+                                <input type="url" id="prodModalImg" class="form-control form-control-sm" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="prodModalDesc" class="form-label small fw-semibold">Descripción Comercial</label>
+                                <textarea id="prodModalDesc" class="form-control form-control-sm" rows="2"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label for="prodModalSpecs" class="form-label small fw-semibold">Especificaciones Técnicas (JSON o Viñetas)</label>
+                                <textarea id="prodModalSpecs" class="form-control form-control-sm" rows="2" placeholder='{"Garantía":"12 meses","Conectividad":"Bluetooth 5.3"}'></textarea>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input type="checkbox" id="prodModalDestacado" class="form-check-input">
+                                    <label for="prodModalDestacado" class="form-check-label small fw-semibold">Destacar en la Página de Inicio</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm rounded-pill" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary btn-sm rounded-pill fw-semibold">Guardar Producto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-3 mt-4 text-center small text-muted border-top bg-white">
+        Powered by <strong>Arniel Paul Salazar Campos (U23216068)</strong> &amp; <strong>Erick Dario Orellana Romero (U23216011)</strong>
+    </footer>
+
+    <!-- Bootstrap 5 Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Scripts Principales -->
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Importaciones Super Huancayo: distribuidores directos de tecnología, electrónica, accesorios móviles y periféricos en Huancayo (Av. Giraldez N.º 442). Garantía y servicio técnico local.">
+    <meta name="keywords" content="importaciones super huancayo, tecnologia huancayo, audifonos, smartwatches, av giraldez 442">
+    <meta name="theme-color" content="#081D5A">
+
+    <title>Importaciones Super Huancayo | Primeros en Tecnología</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Estilos Principales y Tema Unificado -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/unified-theme.css?v=20261124">
+</head>
+
+<body>
+
+    <!-- =========================================================
+         TOPBAR CORPORATIVO UNIFICADO
+         ========================================================= -->
+    <div class="super-topbar">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="super-location-badge">
+                <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                <span>Tienda Oficial: <strong>Av. Giraldez N.º 442, Huancayo</strong></span>
+            </div>
+            <div class="d-none d-md-flex align-items-center gap-3">
+                <span>🕒 Lun - Sáb 9:00 AM - 8:00 PM</span>
+                <span>•</span>
+                <a href="https://api.whatsapp.com/send?phone=51952000000" target="_blank" rel="noopener">💬 WhatsApp: +51 952 000 000</a>
+                <span>•</span>
+                <a href="legal.html#garantias">Garantía Escrita</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         HEADER PRINCIPAL UNIFICADO
+         ========================================================= -->
+    <header class="super-main-header">
+        <div class="container">
+            <div class="row align-items-center g-2 g-md-3">
+                <!-- Logo Oficial -->
+                <div class="col-auto d-flex align-items-center gap-3">
+                    <a href="index.html" class="super-brand-logo">
+                        <img src="assets/img/logo.png" alt="Importaciones Super Huancayo - Primeros en Tecnología" class="navbar-logo-img">
+                    </a>
+
+                    <!-- Menú Catálogo -->
+                    <a href="catalogo.html" class="super-menu-btn d-none d-lg-inline-flex">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg>
+                        <span>Catálogo</span>
+                    </a>
+                </div>
+
+                <!-- Buscador Central -->
+                <div class="col-12 col-lg order-3 order-lg-2">
+                    <form action="catalogo.html" method="GET" class="super-search-wrapper">
+                        <input type="search" name="q" class="super-search-input" placeholder="¿Qué buscas hoy? Audífonos ANC, Smartwatches, Cargadores GaN, Periféricos..." aria-label="Buscar productos">
+                        <button type="submit" class="super-search-btn" aria-label="Buscar">
+                            <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Acciones de Usuario -->
+                <div class="col-auto ms-auto order-2 order-lg-3">
+                    <div class="super-user-actions d-flex align-items-center gap-2">
+                        <div id="superUserMenuContainer"></div>
+
+                        <a href="seguimiento.html" class="super-cart-btn d-none d-md-inline-flex" title="Rastrear Pedido">
+                            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.25V3.375c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v10.875m12 0H3.375"/></svg>
+                        </a>
+
+                        <a href="contacto.html" class="super-cart-btn d-none d-md-inline-flex" title="Nuestra Tienda">
+                            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+                        </a>
+
+                        <button type="button" class="super-cart-btn super-cart-trigger border-0 bg-transparent" title="Ver Carrito de Compras" aria-label="Abrir carrito de compras">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+                            <span class="super-cart-badge" style="display:none;">0</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- =========================================================
+         CINTA INFORMATIVA EXPRESS
+         ========================================================= -->
+    <div class="super-express-strip">
+        <div class="container d-flex justify-content-center align-items-center gap-2 flex-wrap">
+            <span>⚡ Siempre <strong>más rápidos</strong>:</span>
+            <span class="super-express-badge">envío express 180 min</span>
+            <span>en Huancayo y Valle del Mantaro • Retiro gratis en Av. Giraldez 442</span>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         TABS DE NAVEGACIÓN UNIFICADAS (CON INDICADOR ACTIVO)
+         ========================================================= -->
+    <nav class="super-nav-tabs">
+        <div class="container">
+            <ul class="super-tabs-container">
+                <li class="super-tab-item active">
+                    <a href="index.html" class="super-tab-link">Inicio</a>
+                </li>
+                <li class="super-tab-item">
+                    <a href="catalogo.html" class="super-tab-link">Catálogo Completo</a>
+                </li>
+                <li class="super-tab-item">
+                    <a href="catalogo.html?cat=audio" class="super-tab-link">Audio y Parlantes</a>
+                </li>
+                <li class="super-tab-item">
+                    <a href="catalogo.html?cat=accesorios" class="super-tab-link">Smartwatches</a>
+                </li>
+                <li class="super-tab-item">
+                    <a href="catalogo.html?cat=computo" class="super-tab-link">Cómputo & Periféricos</a>
+                </li>
+                <li class="super-tab-item">
+                    <a href="nosotros.html" class="super-tab-link">Nosotros</a>
+                </li>
+                <li class="super-tab-item">
+                    <a href="contacto.html" class="super-tab-link">Contacto</a>
+                </li>
+                <li class="super-tab-item">
+                    <a href="legal.html" class="super-tab-link">Políticas</a>
+                </li>
+                <li class="super-tab-item ms-auto">
+                    <a href="dashboard.html" class="super-tab-link super-tab-dashboard-btn">
+                        <span class="badge bg-primary text-white me-1" style="font-size: 10px;">PRO</span>📊 Dashboard Admin
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="contenido">
+
+        <!-- =========================================================
+             HERO BANNER CORPORATIVO (ESTILO RETAIL MODERNO)
+             ========================================================= -->
+        <section class="py-4">
+            <div class="container">
+                <div class="row g-3">
+                    <div class="col-12 col-lg-8">
+                        <div class="p-4 p-md-5 rounded-4 text-white h-100 d-flex flex-column justify-content-center super-hero-main" style="background: linear-gradient(135deg, #081D5A 0%, #0B3FC1 100%); min-height: 360px;">
+                            <span class="badge bg-white text-primary mb-2 align-self-start fw-bold" style="letter-spacing: 1px;">OFERTAS HUANCAYO 2026</span>
+                            <h1 style="font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; line-height: 1.1; margin-bottom: 16px;">
+                                Tecnología con <span style="color: #93C5FD;">Garantía Local</span> en Av. Giraldez 442
+                            </h1>
+                            <p class="text-white-50 mb-4" style="font-size: 15px; max-width: 520px;">
+                                Distribuidores directos de audífonos profesionales, relojes inteligentes, periféricos y accesorios con soporte técnico directo en Huancayo.
+                            </p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <a href="catalogo.html" class="btn btn-light rounded-pill px-4 py-2 fw-bold text-primary d-inline-flex align-items-center gap-2 super-cta-pulso">
+                                    Explorar Catálogo Completo ›
+                                </a>
+                                <a href="https://api.whatsapp.com/send?phone=51952000000" target="_blank" rel="noopener" class="btn btn-outline-light rounded-pill px-4 py-2 fw-semibold">
+                                    Ventas WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-4">
+                        <div class="d-flex flex-column gap-3 h-100">
+                            <div class="p-4 rounded-4 text-white flex-fill d-flex flex-column justify-content-center super-hero-side-card super-delay-1" style="background: linear-gradient(135deg, #081D5A 0%, #0B3FC1 100%);">
+                                <span class="badge bg-white text-primary mb-2 align-self-start fw-bold">ENVÍO LOCAL</span>
+                                <h3 class="h5 fw-bold mb-1">Entregas en 180 Minutos</h3>
+                                <p class="small text-white-50 mb-2">Envíos directos en Huancayo, El Tambo y Chilca o retiro en tienda.</p>
+                                <a href="catalogo.html?cat=audio" class="text-white fw-bold small text-decoration-none">Ver Audífonos ANC →</a>
+                            </div>
+
+                            <div class="p-4 rounded-4 text-white flex-fill d-flex flex-column justify-content-center super-hero-side-card super-delay-2" style="background: linear-gradient(135deg, #0B3FC1 0%, #1D5BFD 100%);">
+                                <span class="badge bg-white text-primary mb-2 align-self-start fw-bold">GARANTÍA SUNAT</span>
+                                <h3 class="h5 fw-bold mb-1">Boleta y Factura Electrónica</h3>
+                                <p class="small text-white-50 mb-2">RUC 20608945123. Equipos originales con cobertura por escrito.</p>
+                                <a href="catalogo.html?cat=accesorios" class="text-white fw-bold small text-decoration-none">Ver Smartwatches →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             CINTA PROMOCIONAL DE CUPÓN (ESTILO FALABELLA)
+             ========================================================= -->
+        <section class="py-2">
+            <div class="container">
+                <div class="p-3 rounded-4 d-flex flex-wrap align-items-center justify-content-between gap-3 text-white super-promo-strip" style="background: linear-gradient(90deg, #081D5A 0%, #0B3FC1 100%); box-shadow: 0 4px 16px rgba(8, 29, 90, 0.1);">
+                    <div class="d-flex align-items-center gap-3 flex-wrap">
+                        <span class="badge bg-white text-primary px-3 py-2 fw-bold" style="font-size: 12px; letter-spacing: 0.5px;">CUPÓN NOVIEMBRE</span>
+                        <div class="fw-bold" style="font-size: 15px;">
+                            TE REGALAMOS UN VALE DE <span class="badge bg-primary text-white px-2 py-1 fs-6">S/ 40</span> POR CADA S/ 100 DE COMPRA
+                        </div>
+                        <span class="d-none d-xl-inline text-white-50 small">• Válido en audífonos ANC, smartwatches y periféricos</span>
+                    </div>
+                    <a href="catalogo.html" class="btn btn-light rounded-pill px-4 py-2 fw-bold text-primary btn-sm d-inline-flex align-items-center gap-2">
+                        ¡Ver todo! ›
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             CATEGORÍAS EN CARDS VERTICALES
+             ========================================================= -->
+        <section class="py-4">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-end mb-3">
+                    <div>
+                        <h2 class="super-section-title mb-0">Busca por categoría<span class="super-dot">.</span></h2>
+                        <span class="super-section-sub">Líneas especializadas con disponibilidad inmediata en tienda</span>
+                    </div>
+                    <a href="catalogo.html" class="btn btn-outline-primary btn-sm rounded-pill px-3 fw-semibold">Ver Todo</a>
+                </div>
+
+                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
+                    <div class="col">
+                        <a href="catalogo.html?cat=audio" class="super-cat-vertical-card">
+                            <img src="assets/img/catalogo/banner-11.jpg" alt="Audio">
+                            <span class="super-cat-vertical-badge">AUDIO<span class="super-dot">.</span></span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="catalogo.html?cat=accesorios" class="super-cat-vertical-card">
+                            <img src="assets/img/catalogo/banner-12.jpg" alt="Smartwatches">
+                            <span class="super-cat-vertical-badge">RELOJES<span class="super-dot">.</span></span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="catalogo.html?cat=computo" class="super-cat-vertical-card">
+                            <img src="assets/img/catalogo/banner-13.jpg" alt="Cómputo">
+                            <span class="super-cat-vertical-badge">CÓMPUTO<span class="super-dot">.</span></span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="catalogo.html?cat=telefonia" class="super-cat-vertical-card">
+                            <img src="assets/img/catalogo/banner-14.jpg" alt="Cargadores GaN">
+                            <span class="super-cat-vertical-badge">ENERGÍA GaN<span class="super-dot">.</span></span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="catalogo.html?q=Mouse" class="super-cat-vertical-card">
+                            <img src="assets/img/catalogo/banner-15.jpg" alt="Periféricos">
+                            <span class="super-cat-vertical-badge">PERIFÉRICOS<span class="super-dot">.</span></span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="catalogo.html?cat=hogar" class="super-cat-vertical-card">
+                            <img src="assets/img/catalogo/banner-16.jpg" alt="Hogar Smart">
+                            <span class="super-cat-vertical-badge">HOGAR SMART<span class="super-dot">.</span></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             OFERTAS DESTACADAS (CARDS CON BLOQUE DE PRECIO CORPORATIVO)
+             ========================================================= -->
+        <section class="py-5" style="background-color: var(--super-fondo);">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-end mb-4">
+                    <div>
+                        <h2 class="super-section-title mb-0">Ofertas Imperdibles en Huancayo<span class="super-dot">.</span></h2>
+                        <span class="super-section-sub">Dispositivos destacados con garantía por escrito</span>
+                    </div>
+                    <a href="catalogo.html" class="btn btn-primary btn-sm rounded-pill px-4 fw-semibold">Ver Todo el Catálogo</a>
+                </div>
+
+                <div id="homeFeaturedGrid" class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+                    <!-- Item 1 -->
+                    <div class="col">
+                        <div class="super-product-card">
+                            <div class="super-product-img-box">
+                                <span class="super-product-tag-discount">-25%</span>
+                                <img src="assets/img/catalogo/banner-01.jpg" alt="Audífonos SONY">
+                            </div>
+                            <div class="super-product-bottom">
+                                <div class="super-product-info">
+                                    <span class="super-product-brand">SONY TECH</span>
+                                    <p class="super-product-name">Audífonos Diadema Pro Wireless ANC</p>
+                                </div>
+                                <div class="super-product-price-block">
+                                    S/219.90
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="col">
+                        <div class="super-product-card">
+                            <div class="super-product-img-box">
+                                <span class="super-product-tag-discount">-20%</span>
+                                <img src="assets/img/catalogo/banner-02.jpg" alt="Smartwatch Active Fit">
+                            </div>
+                            <div class="super-product-bottom">
+                                <div class="super-product-info">
+                                    <span class="super-product-brand">XIAOMI ECO</span>
+                                    <p class="super-product-name">Smartwatch AMOLED Oxímetro IP68</p>
+                                </div>
+                                <div class="super-product-price-block">
+                                    S/169.90
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="col">
+                        <div class="super-product-card">
+                            <div class="super-product-img-box">
+                                <span class="super-product-tag-discount">-25%</span>
+                                <img src="assets/img/catalogo/banner-07.jpg" alt="Cargador GaN 65W">
+                            </div>
+                            <div class="super-product-bottom">
+                                <div class="super-product-info">
+                                    <span class="super-product-brand">BASEUS PRO</span>
+                                    <p class="super-product-name">Cargador Rápido GaN 65W Triple Puerto</p>
+                                </div>
+                                <div class="super-product-price-block accent">
+                                    S/89.90
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="col">
+                        <div class="super-product-card">
+                            <div class="super-product-img-box">
+                                <span class="super-product-tag-discount">-28%</span>
+                                <img src="assets/img/catalogo/banner-06.jpg" alt="Mouse Logitech">
+                            </div>
+                            <div class="super-product-bottom">
+                                <div class="super-product-info">
+                                    <span class="super-product-brand">LOGITECH</span>
+                                    <p class="super-product-name">Mouse Inalámbrico Dual Mode 2.4G</p>
+                                </div>
+                                <div class="super-product-price-block">
+                                    S/49.90
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             #LO.ÚLTIMO PRIMEROS EN TECNOLOGÍA (MARCAS DESTACADAS)
+             ========================================================= -->
+        <section class="py-5 bg-white">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-end mb-4">
+                    <div>
+                        <h2 class="super-section-title mb-0">#lo.último <span style="font-size: 18px; color: var(--super-texto-muted); font-weight: 600;">PRIMEROS EN TECNOLOGÍA</span></h2>
+                        <span class="super-section-sub">Distribución directa de marcas líderes con garantía oficial en Huancayo</span>
+                    </div>
+                    <a href="catalogo.html" class="btn btn-outline-primary btn-sm rounded-pill px-3 fw-semibold">Ver Marcas</a>
+                </div>
+
+                <!-- Grid de 4 Marcas Oficiales (Estilo Falabella Brand Cards) -->
+                <div class="row row-cols-2 row-cols-md-4 g-3 mb-4">
+                    <div class="col">
+                        <a href="catalogo.html?q=Anker" class="super-cat-vertical-card" style="height: 240px;">
+                            <img src="assets/img/catalogo/banner-09.jpg" alt="Anker">
+                            <span class="super-cat-vertical-badge">ANKER SOUNDCORE<span class="super-dot">.</span></span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="catalogo.html?q=Haylou" class="super-cat-vertical-card" style="height: 240px;">
+                            <img src="assets/img/catalogo/banner-10.jpg" alt="Haylou">
+                            <span class="super-cat-vertical-badge">HAYLOU SMART<span class="super-dot">.</span></span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="catalogo.html?q=Xiaomi" class="super-cat-vertical-card" style="height: 240px;">
+                            <img src="assets/img/catalogo/banner-17.jpg" alt="Xiaomi">
+                            <span class="super-cat-vertical-badge">XIAOMI ECO<span class="super-dot">.</span></span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="catalogo.html?q=Baseus" class="super-cat-vertical-card" style="height: 240px;">
+                            <img src="assets/img/catalogo/banner-07.jpg" alt="Baseus">
+                            <span class="super-cat-vertical-badge">BASEUS POWER<span class="super-dot">.</span></span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2 Banners Divididos de Campaña (Estilo Falabella Split Promos) -->
+                <div class="row g-3">
+                    <div class="col-12 col-md-6">
+                        <div class="p-4 rounded-4 text-white d-flex flex-column justify-content-between" style="background: linear-gradient(135deg, #081D5A 0%, #0B3FC1 100%); min-height: 200px;">
+                            <div>
+                                <span class="badge bg-white text-primary mb-2 fw-bold">LANZAMIENTO EXCLUSIVO</span>
+                                <h3 class="h5 fw-bold mb-1">Cargadores GaN 65W & 100W</h3>
+                                <p class="small text-white-50 mb-0">Carga ultrarrápida certificada para smartphones, tablets y laptops en Av. Giraldez 442.</p>
+                            </div>
+                            <div class="mt-3">
+                                <a href="catalogo.html?cat=telefonia" class="btn btn-light btn-sm rounded-pill px-3 fw-bold text-primary">Ver Cargadores GaN →</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="p-4 rounded-4 text-white d-flex flex-column justify-content-between" style="background: linear-gradient(135deg, #0B3FC1 0%, #1D5BFD 100%); min-height: 200px;">
+                            <div>
+                                <span class="badge bg-white text-primary mb-2 fw-bold">AUDIO PROFESIONAL</span>
+                                <h3 class="h5 fw-bold mb-1">Audífonos ANC con Cancelación Activa</h3>
+                                <p class="small text-white-50 mb-0">Aislamiento acústico de -40dB, códec de alta fidelidad y batería de hasta 60 horas de uso.</p>
+                            </div>
+                            <div class="mt-3">
+                                <a href="catalogo.html?cat=audio" class="btn btn-light btn-sm rounded-pill px-3 fw-bold text-primary">Ver Audífonos ANC →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =========================================================
+         PIE DE PÁGINA (MAIN FOOTER) UNIFICADO
+         ========================================================= -->
+    <footer class="super-unified-footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-12 col-md-4">
+                    <div class="super-footer-logo-box">
+                        <img src="assets/img/logo.png" alt="Importaciones Super Huancayo">
+                    </div>
+                    <p style="font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.78);">
+                        Venta y distribución de tecnología, electrónica y accesorios con sede central en Huancayo, Junín. Garantía oficial de fábrica y atención técnica personalizada.
+                    </p>
+                    <span class="badge bg-light text-dark fw-bold">RUC: 20608945123 • Régimen Especial</span>
+                </div>
+
+                <div class="col-6 col-md-2">
+                    <h4 class="h6 fw-bold text-white text-uppercase mb-3">Navegación</h4>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 mb-0">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="catalogo.html">Catálogo Completo</a></li>
+                        <li><a href="nosotros.html">Quiénes Somos</a></li>
+                        <li><a href="contacto.html">Contacto y Tienda</a></li>
+                        <li><a href="legal.html">Políticas y Garantías</a></li>
+                        <li><a href="dashboard.html" class="fw-bold text-white">Dashboard Empleados</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-md-3">
+                    <h4 class="h6 fw-bold text-white text-uppercase mb-3">Categorías</h4>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 mb-0">
+                        <li><a href="catalogo.html?cat=audio">Audio y Parlantes</a></li>
+                        <li><a href="catalogo.html?cat=accesorios">Smartwatches y Relojes</a></li>
+                        <li><a href="catalogo.html?cat=telefonia">Telefonía y Cables GaN</a></li>
+                        <li><a href="catalogo.html?cat=computo">Cómputo y Periféricos</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-12 col-md-3">
+                    <h4 class="h6 fw-bold text-white text-uppercase mb-3">Sede Principal</h4>
+                    <address class="small mb-0 not-italic" style="color: rgba(255,255,255,0.78); line-height: 1.8;">
+                        <p class="mb-1">📍 Av. Giraldez N.º 442, Huancayo, Junín, Perú</p>
+                        <p class="mb-1">📞 <a href="https://api.whatsapp.com/send?phone=51952000000" target="_blank" rel="noopener">+51 952 000 000</a></p>
+                        <p class="mb-1"><svg width="14" height="14" fill="currentColor" class="me-1" style="vertical-align:-2px;" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/></svg><a href="mailto:ventas@superimportacioneshuancayo.pe">ventas@superimportacioneshuancayo.pe</a></p>
+                        <p class="mb-0">🕒 Lun - Sáb: 9:00 AM a 8:00 PM</p>
+                    </address>
+                </div>
+            </div>
+
+            <div class="super-footer-bottom d-flex justify-content-between align-items-center flex-wrap gap-2">
+                <div>
+                    © 2026 Importaciones Super Huancayo S.A.C. • Todos los derechos reservados • Av. Giraldez N.º 442, Huancayo, Perú.
+                    <div class="mt-1" style="color: rgba(255,255,255,0.85);">Powered by <strong>Arniel Paul Salazar Campos (U23216068)</strong> &amp; <strong>Erick Dario Orellana Romero (U23216011)</strong></div>
+                </div>
+                <div class="d-flex gap-2 small">
+                    <span class="badge bg-secondary">HTML5 Semántico</span>
+                    <span class="badge bg-secondary">Bootstrap 5</span>
+                    <span class="badge bg-secondary">Spring Boot 3</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+        <a href="https://api.whatsapp.com/send?phone=51952000000&text=Hola%20Importaciones%20Super%20Huancayo,%20deseo%20hacer%20una%20consulta"
+        class="wsp-flotante" target="_blank" rel="noopener" aria-label="Escribir a Importaciones Super Huancayo por WhatsApp">
+        <svg width="30" height="30" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.364 2.76 1.057 3.96L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592z"/></svg>
+        <span class="wsp-flotante__tooltip">Consultas por WhatsApp</span>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/catalogo-data.js?v=20261124"></script>
+    <script src="js/main.js?v=20261124"></script>
+
+</body>
+
+</html>

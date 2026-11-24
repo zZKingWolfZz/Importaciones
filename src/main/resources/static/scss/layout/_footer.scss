@@ -1,0 +1,148 @@
+.main-footer {
+    background-color: $azul-noche;
+    color: $blanco;
+    padding: calculate-rem(50px) 0 calculate-rem(22px);
+    border-top: 3px solid $azul-super;
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: calculate-rem(32px);
+        padding-bottom: calculate-rem(36px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        @include respond-to('sm') {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include respond-to('lg') {
+            grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+            gap: calculate-rem(36px);
+        }
+    }
+
+    &__brand {
+        .footer-logo-box {
+            display: inline-block;
+            background-color: $blanco;
+            padding: calculate-rem(10px) calculate-rem(16px);
+            @include border-radius(8px);
+            margin-bottom: calculate-rem(14px);
+
+            img {
+                height: 38px;
+                width: auto;
+                object-fit: contain;
+                display: block;
+            }
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: calculate-rem(13px);
+            line-height: 1.6;
+        }
+
+        .ruc-badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: calculate-rem(11px);
+            font-weight: 600;
+            padding: calculate-rem(3px) calculate-rem(8px);
+            @include border-radius(4px);
+            margin-top: calculate-rem(6px);
+        }
+    }
+
+    &__col {
+        h4 {
+            font-family: $fuente-titulos;
+            font-size: calculate-rem(15px);
+            font-weight: 700;
+            color: $blanco;
+            margin-bottom: calculate-rem(16px);
+            position: relative;
+            padding-bottom: calculate-rem(6px);
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 28px;
+                height: 2px;
+                background-color: $azul-super;
+            }
+        }
+
+        ul {
+            li {
+                margin-bottom: calculate-rem(8px);
+
+                a {
+                    color: rgba(255, 255, 255, 0.75);
+                    font-size: calculate-rem(13px);
+                    @include transition($transicion-rapida);
+
+                    &:hover {
+                        color: $blanco;
+                        padding-left: 4px;
+                    }
+                }
+            }
+        }
+    }
+
+    &__address {
+        font-style: normal;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: calculate-rem(13px);
+        line-height: 1.65;
+
+        p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: calculate-rem(8px);
+        }
+
+        time {
+            color: lighten($azul-super, 25%);
+            font-weight: 600;
+        }
+    }
+
+    &__bottom {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        gap: calculate-rem(14px);
+        padding-top: calculate-rem(20px);
+
+        p {
+            color: rgba(255, 255, 255, 0.55);
+            font-size: calculate-rem(12px);
+            margin-bottom: 0;
+        }
+
+        .footer-badges {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            gap: calculate-rem(10px);
+
+            span {
+                font-size: calculate-rem(11px);
+                color: rgba(255, 255, 255, 0.45);
+            }
+        }
+    }
+}

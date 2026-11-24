@@ -1,0 +1,121 @@
+// ==============================================================================
+// PÁGINA: DASHBOARD DE EMPLEADOS (IMPORTACIONES SUPER HUANCAYO)
+// ==============================================================================
+
+.dashboard-hero {
+    background: linear-gradient(135deg, $azul-noche 0%, $azul-super 100%);
+    position: relative;
+    border-bottom: 3px solid $azul-super;
+
+    h1 {
+        font-family: $fuente-titulos;
+        font-weight: 700;
+    }
+}
+
+.dashboard-card {
+    background-color: $blanco;
+    @include border-radius($border-radius);
+    border: 1px solid $borde-color;
+    @include box-shadow($sombra-suave);
+    @include transition($transicion-normal);
+
+    &:hover {
+        @include box-shadow($sombra-media);
+        @include transform(translateY(-2px));
+    }
+}
+
+.table,
+.table-dashboard {
+    tbody tr {
+        transition: background-color 0.25s ease, transform 0.15s ease;
+
+        &:hover {
+            background-color: #f1f5fb !important;
+        }
+    }
+}
+
+.table-dashboard {
+    tbody tr:hover {
+        background-color: $azul-suave !important;
+    }
+}
+
+.btn-success {
+    background-color: $verde-wsp;
+    border-color: $verde-wsp;
+    @include transition($transicion-rapida);
+
+    &:hover,
+    &:focus {
+        background-color: darken($verde-wsp, 6%) !important;
+        border-color: darken($verde-wsp, 6%) !important;
+        @include transform(translateY(-1px));
+    }
+}
+
+.btn-primary {
+    background-color: $azul-super;
+    border-color: $azul-super;
+    @include transition($transicion-rapida);
+
+    &:hover,
+    &:focus {
+        background-color: $azul-hover !important;
+        border-color: $azul-hover !important;
+        @include transform(translateY(-1px));
+    }
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    @include transition($transicion-rapida);
+
+    &:hover {
+        background-color: #bb2d3b !important;
+        border-color: #b02a37 !important;
+        @include transform(translateY(-1px));
+    }
+}
+
+.table-warning {
+    background-color: #fff3cd !important;
+}
+
+// Badges de especialidad
+.badge-software {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+}
+
+.badge-telecom {
+    background-color: #cff4fc;
+    color: #055160;
+    border: 1px solid #b6effb;
+}
+
+.badge-sistemas {
+    background-color: #e2d9f3;
+    color: #432874;
+    border: 1px solid #d0c2eb;
+}
+
+// Formulario y controles de dashboard
+#formEmpleado {
+    max-width: 100%;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: $azul-super;
+    @include box-shadow(0 0 0 0.25rem rgba(11, 63, 193, 0.18));
+}
+
+// Animaciones suaves
+.toast {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}

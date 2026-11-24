@@ -1,0 +1,56 @@
+[ {
+  "id" : 1,
+  "dni" : "45215847",
+  "apellidos" : "Carhuamaca Salinas",
+  "nombres" : "Annie Fiorella",
+  "telefono" : "987654147",
+  "correo" : "carmencita@hotmail.com",
+  "direccion" : "Av. Wilson 123",
+  "especialidad" : "Telecomunicaciones",
+  "fechaRegistro" : "2026-11-23 04:59:22",
+  "activo" : true
+}, {
+  "id" : 2,
+  "dni" : "54145784",
+  "apellidos" : "Chávez Cavero",
+  "nombres" : "Noldia",
+  "telefono" : "963254789",
+  "correo" : "chavez@utp.edu.pe",
+  "direccion" : "Av. Lima 123",
+  "especialidad" : "Software",
+  "fechaRegistro" : "2026-11-23 04:59:22",
+  "activo" : true
+}, {
+  "id" : 3,
+  "dni" : "09876789",
+  "apellidos" : "Carmona Solís",
+  "nombres" : "Carlos Felipe",
+  "telefono" : "989878989",
+  "correo" : "carlos@utp.edu.pe",
+  "direccion" : "Jr. Lima 1234",
+  "especialidad" : "Telecomunicaciones",
+  "fechaRegistro" : "2026-11-23 04:59:22",
+  "activo" : true
+}, {
+  "id" : 4,
+  "dni" : "07654321",
+  "apellidos" : "Castillo Cajamalqui",
+  "nombres" : "Pablo Alberto",
+  "telefono" : "987654321",
+  "correo" : "pabloacr@utp.edu.pe",
+  "direccion" : "Jr. Lima 123",
+  "especialidad" : "Sistemas e Informática",
+  "fechaRegistro" : "2026-11-23 04:59:22",
+  "activo" : true
+}, {
+  "id" : 5,
+  "dni" : "72849102",
+  "apellidos" : "Orellana & Arniel",
+  "nombres" : "Soporte Técnico Huancayo",
+  "telefono" : "952000000",
+  "correo" : "soporte@superimportacioneshuancayo.pe",
+  "direccion" : "Av. Giraldez 442",
+  "especialidad" : "Sistemas e Informática",
+  "fechaRegistro" : "2026-11-23 04:59:22",
+  "activo" : true
+} ]

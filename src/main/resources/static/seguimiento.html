@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Rastreo de pedidos en tiempo real en Importaciones Super Huancayo. Consulta el estado de tu compra, boleta/factura y entrega en Huancayo o a nivel nacional.">
+    <meta name="theme-color" content="#081D5A">
+
+    <title>Seguimiento de Pedidos en Vivo | Importaciones Super Huancayo</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Estilos Principales y Tema Unificado -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/unified-theme.css?v=20261124">
+
+    <style>
+        .timeline-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin: 2rem 0;
+        }
+        .timeline-steps::before {
+            content: "";
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            height: 4px;
+            background: #e2e8f0;
+            z-index: 1;
+        }
+        .timeline-step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            flex: 1;
+        }
+        .timeline-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #fff;
+            border: 3px solid #cbd5e1;
+            color: #94a3b8;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .timeline-step.completed .timeline-icon {
+            background: #10b981;
+            border-color: #10b981;
+            color: #fff;
+        }
+        .timeline-step.active .timeline-icon {
+            background: #081D5A;
+            border-color: #081D5A;
+            color: #fff;
+            box-shadow: 0 0 0 5px rgba(8, 29, 90, 0.2);
+        }
+        .timeline-step.cancelled .timeline-icon {
+            background: #ef4444;
+            border-color: #ef4444;
+            color: #fff;
+        }
+        .timeline-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #64748b;
+        }
+        .timeline-step.active .timeline-label {
+            color: #081D5A;
+            font-weight: 700;
+        }
+        @media (max-width: 767.98px) {
+            .timeline-steps {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                margin: 1.25rem 0;
+                padding-left: 4px;
+            }
+            .timeline-steps::before {
+                top: 18px;
+                bottom: 18px;
+                left: 22px;
+                right: auto;
+                width: 4px;
+                height: auto;
+            }
+            .timeline-step {
+                display: flex;
+                align-items: center;
+                gap: 0.85rem;
+                text-align: left;
+                width: 100%;
+                flex: none;
+            }
+            .timeline-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 0.95rem;
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+            .timeline-label {
+                font-size: 0.85rem;
+            }
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: #fff !important; }
+            .card { border: none !important; box-shadow: none !important; }
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+    <!-- TOPBAR CORPORATIVO UNIFICADO -->
+    <div class="super-topbar no-print">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="super-location-badge">
+                <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                <span>Tienda Oficial: <strong>Av. Giraldez N.º 442, Huancayo</strong></span>
+            </div>
+            <div class="d-none d-md-flex align-items-center gap-3">
+                <span>🕒 Lun - Sáb 9:00 AM - 8:00 PM</span>
+                <span>•</span>
+                <a href="https://api.whatsapp.com/send?phone=51952000000" target="_blank" rel="noopener">💬 Soporte: +51 952 000 000</a>
+                <span>•</span>
+                <a href="catalogo.html">Catálogo Completo</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER PRINCIPAL -->
+    <header class="super-main-header no-print">
+        <div class="container">
+            <div class="row align-items-center g-2 g-md-3">
+                <div class="col-auto d-flex align-items-center gap-3">
+                    <a href="index.html" class="super-brand-logo">
+                        <img src="assets/img/logo.png" alt="Importaciones Super Huancayo" class="navbar-logo-img">
+                    </a>
+                    <a href="catalogo.html" class="super-menu-btn d-none d-lg-inline-flex">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg>
+                        <span>Catálogo</span>
+                    </a>
+                </div>
+
+                <div class="col text-center d-none d-md-block">
+                    <h5 class="fw-bold text-dark mb-0">Rastreo de Pedidos & Despachos</h5>
+                </div>
+
+                <div class="col-auto ms-auto">
+                    <div class="super-user-actions d-flex align-items-center gap-2">
+                        <div id="superUserMenuContainer"></div>
+
+                        <button type="button" class="super-cart-btn super-cart-trigger border-0 bg-transparent" title="Ver Carrito de Compras" aria-label="Abrir carrito de compras">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+                            <span class="super-cart-badge" style="display:none;">0</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container py-5 my-2">
+
+        <!-- CAJA DE BÚSQUEDA -->
+        <div class="row justify-content-center mb-5 no-print">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 text-center bg-white">
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-1 rounded-pill mb-2 d-inline-block">
+                        Consulta en Línea 24/7
+                    </span>
+                    <h2 class="fw-bold text-dark mb-2">¿Dónde está tu pedido?</h2>
+                    <p class="text-muted mb-4">Ingresa tu código de pedido asignado al momento de tu compra (Ej: <code>PED-2026-000001</code>).</p>
+
+                    <form id="formBuscarPedido" class="d-flex flex-column flex-sm-row gap-2">
+                        <input type="text" id="inputCodigoPedido" class="form-control form-control-lg text-uppercase fw-semibold" placeholder="PED-2026-XXXXXX" required>
+                        <button type="submit" class="btn btn-primary btn-lg px-4 fw-bold rounded-pill text-nowrap">
+                            🔍 Rastrear Pedido
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- SPINNER DE CARGA -->
+        <div id="loadingTracker" class="text-center py-5 d-none">
+            <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                <span class="visually-hidden">Consultando estado...</span>
+            </div>
+            <p class="mt-3 text-muted fw-semibold">Consultando base de datos en tiempo real...</p>
+        </div>
+
+        <!-- MENSAJE DE ERROR -->
+        <div id="errorTracker" class="alert alert-warning text-center d-none shadow-sm rounded-3 py-4 max-w-lg mx-auto" role="alert">
+            <h5 class="fw-bold mb-2">Pedido no encontrado</h5>
+            <p class="mb-3 small" id="errorTrackerMsg">No encontramos ningún pedido registrado con ese código. Por favor verifica los datos o comunícate con atención al cliente.</p>
+            <a href="https://api.whatsapp.com/send?phone=51952000000" target="_blank" class="btn btn-outline-dark btn-sm rounded-pill fw-semibold">
+                Consultar por WhatsApp
+            </a>
+        </div>
+
+        <!-- RESULTADO DEL RASTREO -->
+        <div id="resultTracker" class="d-none">
+            <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white mb-4">
+                
+                <!-- CABECERA DEL PEDIDO -->
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 pb-3 border-bottom">
+                    <div>
+                        <div class="d-flex align-items-center gap-2 mb-1">
+                            <h4 class="fw-bold text-dark mb-0" id="resCodigo">PED-2026-000001</h4>
+                            <span class="badge rounded-pill px-3 py-2 fs-6 fw-bold" id="resBadgeEstado">CONFIRMADO</span>
+                        </div>
+                        <p class="text-muted small mb-0">Fecha de Registro: <span id="resFecha" class="fw-semibold text-dark">--</span></p>
+                    </div>
+                    <div class="d-flex gap-2 no-print">
+                        <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill fw-semibold" onclick="window.print()">
+                            🖨️ Imprimir
+                        </button>
+                        <a id="btnResWhatsApp" href="#" target="_blank" class="btn btn-success btn-sm rounded-pill fw-semibold">
+                            💬 WhatsApp Asesor
+                        </a>
+                    </div>
+                </div>
+
+                <!-- LÍNEA DE TIEMPO / TIMELINE DE ESTADOS -->
+                <div id="timelineContainer" class="timeline-steps">
+                    <div class="timeline-step" id="step-PENDIENTE">
+                        <div class="timeline-icon">1</div>
+                        <div class="timeline-label">Registrado</div>
+                    </div>
+                    <div class="timeline-step" id="step-CONFIRMADO">
+                        <div class="timeline-icon">2</div>
+                        <div class="timeline-label">Confirmado</div>
+                    </div>
+                    <div class="timeline-step" id="step-EN_PREPARACION">
+                        <div class="timeline-icon">3</div>
+                        <div class="timeline-label">Empaque</div>
+                    </div>
+                    <div class="timeline-step" id="step-EN_CAMINO">
+                        <div class="timeline-icon">4</div>
+                        <div class="timeline-label">En Camino</div>
+                    </div>
+                    <div class="timeline-step" id="step-ENTREGADO">
+                        <div class="timeline-icon">5</div>
+                        <div class="timeline-label">Entregado</div>
+                    </div>
+                </div>
+
+                <!-- DETALLES DE ENVÍO Y FACTURACIÓN -->
+                <div class="row g-4 mt-2">
+                    <div class="col-md-6">
+                        <div class="p-3 bg-light rounded-3 h-100">
+                            <h6 class="fw-bold text-dark mb-3">📍 Información de Entrega</h6>
+                            <p class="small mb-1"><strong>Modalidad:</strong> <span id="resEntrega">--</span></p>
+                            <p class="small mb-1"><strong>Destinatario:</strong> <span id="resCliente">--</span></p>
+                            <p class="small mb-1"><strong>Documento:</strong> <span id="resDoc">--</span></p>
+                            <p class="small mb-1"><strong>Teléfono:</strong> <span id="resTelefono">--</span></p>
+                            <p class="small mb-0"><strong>Dirección:</strong> <span id="resDireccion">--</span></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3 bg-light rounded-3 h-100">
+                            <h6 class="fw-bold text-dark mb-3">💳 Pago y Comprobante</h6>
+                            <p class="small mb-1"><strong>Comprobante SUNAT:</strong> <span id="resComprobante">--</span></p>
+                            <p class="small mb-1"><strong>Método de Pago:</strong> <span id="resPago">--</span></p>
+                            <p class="small mb-1"><strong>Referencia Pago:</strong> <span id="resRefPago">--</span></p>
+                            <p class="small mb-0"><strong>Notas de Despacho:</strong> <span id="resNotas">--</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ARTÍCULOS DEL PEDIDO -->
+                <h6 class="fw-bold text-dark mt-4 mb-3">📦 Productos en este Pedido</h6>
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Producto</th>
+                                <th>SKU</th>
+                                <th class="text-center">Cant.</th>
+                                <th class="text-end">Precio Unit.</th>
+                                <th class="text-end">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resTbodyItems">
+                            <!-- Items dinámicos -->
+                        </tbody>
+                        <tfoot class="table-group-divider">
+                            <tr>
+                                <td colspan="4" class="text-end text-muted small">Subtotal:</td>
+                                <td class="text-end fw-semibold" id="resSubtotal">S/ 0.00</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="text-end text-muted small">Costo de Envío:</td>
+                                <td class="text-end fw-semibold" id="resEnvio">S/ 0.00</td>
+                            </tr>
+                            <tr id="resDescuentoRow" class="d-none text-success">
+                                <td colspan="4" class="text-end small">Descuento aplicado:</td>
+                                <td class="text-end fw-bold" id="resDescuento">- S/ 0.00</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="text-end text-muted small">I.G.V. (18% SUNAT):</td>
+                                <td class="text-end small text-muted" id="resIgv">S/ 0.00</td>
+                            </tr>
+                            <tr class="table-light">
+                                <td colspan="4" class="text-end fw-bold fs-6">TOTAL CANCELADO:</td>
+                                <td class="text-end fw-black text-primary fs-5" id="resTotal">S/ 0.00</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER CORPORATIVO UNIFICADO -->
+    <footer class="super-footer mt-5 no-print">
+        <div class="container py-4">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h6 class="fw-bold text-white mb-3">Importaciones Super Huancayo</h6>
+                    <p class="small text-white-50">
+                        Distribuidores directos de tecnología, gadgets, sonido y periféricos en el centro del país. 
+                        Tienda física y servicio técnico en Av. Giráldez N.º 442, Huancayo, Junín.
+                    </p>
+                </div>
+                <div class="col-md-2 col-6">
+                    <h6 class="fw-bold text-white mb-3">Navegación</h6>
+                    <ul class="list-unstyled small text-white-50">
+                        <li><a href="index.html" class="text-white-50 text-decoration-none">Inicio</a></li>
+                        <li><a href="catalogo.html" class="text-white-50 text-decoration-none">Catálogo Falabella</a></li>
+                        <li><a href="seguimiento.html" class="text-white-50 text-decoration-none">Rastrear Pedido</a></li>
+                        <li><a href="nosotros.html" class="text-white-50 text-decoration-none">Nosotros</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-6">
+                    <h6 class="fw-bold text-white mb-3">Garantía y Legal</h6>
+                    <ul class="list-unstyled small text-white-50">
+                        <li><a href="legal.html#garantias" class="text-white-50 text-decoration-none">Política de Garantía</a></li>
+                        <li><a href="legal.html#devoluciones" class="text-white-50 text-decoration-none">Cambios y Devoluciones</a></li>
+                        <li><a href="contacto.html#libro-reclamaciones" class="text-white-50 text-decoration-none">Libro de Reclamaciones</a></li>
+                        <li><a href="dashboard.html" class="text-white-50 text-decoration-none">Acceso Administrativo ERP</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="fw-bold text-white mb-3">Atención Directa</h6>
+                    <p class="small text-white-50 mb-1">📍 Av. Giráldez N.º 442, Huancayo</p>
+                    <p class="small text-white-50 mb-1">📞 +51 952 000 000 / (064) 234567</p>
+                    <p class="small text-white-50 mb-1">✉️ ventas@superhuancayo.pe</p>
+                </div>
+            </div>
+            <hr class="border-secondary my-3">
+            <div class="text-center small text-white-50">
+                © 2026 Importaciones Super Huancayo S.A.C. Todos los derechos reservados. RUC 20601234567.
+                <div class="mt-1 text-white">Powered by <strong>Arniel Paul Salazar Campos (U23216068)</strong> &amp; <strong>Erick Dario Orellana Romero (U23216011)</strong></div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Scripts Principales -->
+    <script src="js/catalogo-data.js?v=20261124"></script>
+    <script src="js/main.js?v=20261124"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('formBuscarPedido');
+            const input = document.getElementById('inputCodigoPedido');
+            const loading = document.getElementById('loadingTracker');
+            const errorBox = document.getElementById('errorTracker');
+            const resultBox = document.getElementById('resultTracker');
+
+            function buscarOffline(codigo) {
+                loading.classList.add('d-none');
+                const localPed = window.SuperOffline ? window.SuperOffline.findOrder(codigo) : null;
+                if (localPed) {
+                    renderPedido(localPed);
+                    return true;
+                }
+                errorBox.classList.remove('d-none');
+                document.getElementById('errorTrackerMsg').textContent = 'No se encontró el pedido.';
+                return false;
+            }
+
+            async function buscarPedido(codigo) {
+                if (!codigo) return;
+                loading.classList.remove('d-none');
+                errorBox.classList.add('d-none');
+                resultBox.classList.add('d-none');
+
+                try {
+                    if (window.SuperOffline && window.SuperOffline.isFileProtocol()) {
+                        buscarOffline(codigo);
+                        return;
+                    }
+                    const res = await fetch(`/api/pedidos/seguimiento/${encodeURIComponent(codigo.trim())}`);
+                    if (!res.ok && window.SuperOffline && window.SuperOffline.shouldFallbackResponse(res)) {
+                        buscarOffline(codigo);
+                        return;
+                    }
+                    const json = await res.json();
+                    loading.classList.add('d-none');
+
+                    const p = json.data || json;
+                    if (!p || (!p.codigo && !p.id)) {
+                        errorBox.classList.remove('d-none');
+                        document.getElementById('errorTrackerMsg').textContent = json.error || 'No se encontró el pedido.';
+                        return;
+                    }
+
+                    renderPedido(p);
+                } catch (e) {
+                    if (window.SuperOffline) {
+                        buscarOffline(codigo);
+                        return;
+                    }
+                    loading.classList.add('d-none');
+                    errorBox.classList.remove('d-none');
+                    document.getElementById('errorTrackerMsg').textContent = 'Error al comunicarse con el servidor: ' + e.message;
+                }
+            }
+
+            function renderPedido(p) {
+                resultBox.classList.remove('d-none');
+
+                document.getElementById('resCodigo').textContent = p.codigo || ('PED-' + p.id);
+                const badge = document.getElementById('resBadgeEstado');
+                const estado = String(p.estado || 'PENDIENTE').toUpperCase();
+                badge.textContent = estado;
+
+                if (estado === 'ENTREGADO') {
+                    badge.className = 'badge rounded-pill px-3 py-2 fs-6 fw-bold bg-success';
+                } else if (estado === 'EN_CAMINO' || estado === 'EN_PREPARACION') {
+                    badge.className = 'badge rounded-pill px-3 py-2 fs-6 fw-bold bg-primary';
+                } else if (estado === 'CONFIRMADO') {
+                    badge.className = 'badge rounded-pill px-3 py-2 fs-6 fw-bold bg-info text-dark';
+                } else if (estado === 'CANCELADO') {
+                    badge.className = 'badge rounded-pill px-3 py-2 fs-6 fw-bold bg-danger';
+                } else {
+                    badge.className = 'badge rounded-pill px-3 py-2 fs-6 fw-bold bg-warning text-dark';
+                }
+
+                const fechaVal = p.created_at || p.fecha;
+                document.getElementById('resFecha').textContent = fechaVal ? new Date(fechaVal).toLocaleString('es-PE') : '--';
+                document.getElementById('resEntrega').textContent = p.tipo_entrega || p.metodoEntrega || 'Retiro en Tienda';
+                document.getElementById('resCliente').textContent = p.cliente_nombre || p.clienteNombre || '--';
+                document.getElementById('resDoc').textContent = (p.tipo_comprobante || p.tipoDocumento || 'DNI') + ': ' + (p.cliente_dni_ruc || p.numeroDocumento || '--');
+                document.getElementById('resTelefono').textContent = p.cliente_telefono || p.telefono || '--';
+                document.getElementById('resDireccion').textContent = p.direccion_entrega || p.direccionEnvio || 'Av. Giráldez 442, Huancayo (Retiro en tienda)';
+                document.getElementById('resComprobante').textContent = (p.tipo_comprobante || p.tipoComprobante || 'BOLETA') + (p.razon_social ? ' (' + p.razon_social + ')' : '');
+                document.getElementById('resPago').textContent = p.metodo_pago || p.metodoPago || '--';
+                document.getElementById('resRefPago').textContent = p.referencia_pago || p.referenciaPago || 'Pago Verificado';
+                document.getElementById('resNotas').textContent = p.notas || 'Sin notas adicionales';
+
+                // WhatsApp
+                const wspBtn = document.getElementById('btnResWhatsApp');
+                wspBtn.href = `https://api.whatsapp.com/send?phone=51952000000&text=${encodeURIComponent('Hola Importaciones Super Huancayo, consulto por mi pedido ' + (p.codigo || p.id))}`;
+
+                // Timeline
+                const steps = ['PENDIENTE', 'CONFIRMADO', 'EN_PREPARACION', 'EN_CAMINO', 'ENTREGADO'];
+                const stepIdx = steps.indexOf(estado);
+                steps.forEach((s, idx) => {
+                    const el = document.getElementById('step-' + s);
+                    if (!el) return;
+                    el.classList.remove('completed', 'active', 'cancelled');
+                    if (estado === 'CANCELADO') {
+                        el.classList.add('cancelled');
+                    } else if (idx < stepIdx) {
+                        el.classList.add('completed');
+                    } else if (idx === stepIdx) {
+                        el.classList.add('active');
+                    }
+                });
+
+                // Items
+                const tbody = document.getElementById('resTbodyItems');
+                tbody.innerHTML = '';
+                const items = p.items || [];
+                items.forEach(it => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>
+                            <div class="fw-semibold text-dark">${it.nombre_producto || it.productoNombre || 'Producto'}</div>
+                            <small class="text-muted">Garantía oficial Super Huancayo</small>
+                        </td>
+                        <td><code>${it.sku || '--'}</code></td>
+                        <td class="text-center fw-bold">${it.cantidad}</td>
+                        <td class="text-end">S/ ${Number(it.precio_unitario || it.precioUnitario).toFixed(2)}</td>
+                        <td class="text-end fw-bold text-dark">S/ ${Number(it.subtotal).toFixed(2)}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+                document.getElementById('resSubtotal').textContent = `S/ ${Number(p.subtotal || 0).toFixed(2)}`;
+                document.getElementById('resEnvio').textContent = Number(p.costo_envio ?? p.costoEnvio ?? 0) === 0 ? 'GRATIS' : `S/ ${Number(p.costo_envio ?? p.costoEnvio ?? 0).toFixed(2)}`;
+
+                const descRow = document.getElementById('resDescuentoRow');
+                if (Number(p.descuento || 0) > 0) {
+                    descRow.classList.remove('d-none');
+                    document.getElementById('resDescuento').textContent = `- S/ ${Number(p.descuento).toFixed(2)}`;
+                } else {
+                    descRow.classList.add('d-none');
+                }
+
+                document.getElementById('resIgv').textContent = `S/ ${Number(p.igv || 0).toFixed(2)}`;
+                document.getElementById('resTotal').textContent = `S/ ${Number(p.total || 0).toFixed(2)}`;
+            }
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const code = input.value.trim();
+                if (code) {
+                    const url = new URL(window.location);
+                    url.searchParams.set('codigo', code);
+                    window.history.pushState({}, '', url);
+                    buscarPedido(code);
+                }
+            });
+
+            // Verificar si viene con ?codigo= en la URL
+            const params = new URLSearchParams(window.location.search);
+            const initialCode = params.get('codigo');
+            if (initialCode) {
+                input.value = initialCode;
+                buscarPedido(initialCode);
+            }
+        });
+    </script>
+</body>
+</html>

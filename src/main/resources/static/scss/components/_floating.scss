@@ -1,0 +1,61 @@
+.wsp-flotante {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1050;
+    width: 60px;
+    height: 60px;
+    background-color: $verde-wsp;
+    color: $blanco;
+    @include border-radius(50%);
+    @include flex-center;
+    font-size: 32px;
+    text-decoration: none;
+    @include box-shadow(0 6px 20px rgba(14, 122, 63, 0.45));
+
+    -webkit-animation: pulso 2s ease-in-out infinite;
+    animation: pulso 2s ease-in-out infinite;
+
+    -webkit-transition: -webkit-transform 0.3s ease, background-color 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+
+    &:hover {
+        background-color: darken($verde-wsp, 8%);
+        color: $blanco;
+        @include transform(scale(1.12));
+    }
+
+    &__tooltip {
+        position: absolute;
+        right: 70px;
+        background-color: $azul-noche;
+        color: $blanco;
+        padding: calculate-rem(6px) calculate-rem(14px);
+        @include border-radius(8px);
+        font-family: $fuente-titulos;
+        font-size: calculate-rem(12px);
+        font-weight: 600;
+        white-space: nowrap;
+        pointer-events: none;
+        opacity: 0;
+        @include transform(translateX(10px));
+        @include transition($transicion-rapida);
+        @include box-shadow($sombra-media);
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -6px;
+            margin-top: -6px;
+            border-width: 6px 0 6px 6px;
+            border-style: solid;
+            border-color: transparent transparent transparent $azul-noche;
+        }
+    }
+
+    &:hover &__tooltip {
+        opacity: 1;
+        @include transform(translateX(0));
+    }
+}

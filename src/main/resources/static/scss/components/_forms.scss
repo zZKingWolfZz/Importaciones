@@ -1,0 +1,110 @@
+.alerta-base {
+    padding: calculate-rem(12px) calculate-rem(16px);
+    @include border-radius(6px);
+    font-family: $fuente-texto;
+    font-size: calculate-rem(13px);
+    font-weight: 600;
+    line-height: 1.5;
+    margin-top: calculate-rem(14px);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: calculate-rem(10px);
+}
+
+.alerta-exito {
+    @extend .alerta-base;
+    background-color: #E8F5E9;
+    color: darken($verde-wsp, 8%);
+    border-left: 3px solid $verde-wsp;
+}
+
+.alerta-info {
+    @extend .alerta-base;
+    background-color: $azul-suave;
+    color: $azul-super;
+    border-left: 3px solid $azul-super;
+}
+
+.alerta-oferta {
+    @extend .alerta-base;
+    background-color: $azul-suave;
+    color: $azul-noche;
+    border-left: 3px solid $azul-noche;
+}
+
+.formulario {
+    background-color: $blanco;
+    padding: calculate-rem(30px);
+    @include border-radius(10px);
+    @include box-shadow($sombra-suave);
+    border: 1px solid $borde-color;
+
+    &__titulo {
+        font-family: $fuente-titulos;
+        font-size: calculate-rem(20px);
+        font-weight: 700;
+        color: $azul-noche;
+        margin-bottom: calculate-rem(6px);
+    }
+
+    &__bajada {
+        color: $texto-muted;
+        font-size: calculate-rem(13px);
+        margin-bottom: calculate-rem(20px);
+    }
+
+    &__grupo {
+        margin-bottom: calculate-rem(14px);
+
+        label {
+            display: block;
+            font-family: $fuente-titulos;
+            font-size: calculate-rem(12px);
+            font-weight: 600;
+            color: $texto-oscuro;
+            margin-bottom: calculate-rem(4px);
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            background-color: #F8FAFC;
+            border: 1px solid $borde-color;
+            @include border-radius(6px);
+            padding: calculate-rem(10px) calculate-rem(14px);
+            font-family: $fuente-texto;
+            font-size: calculate-rem(13px);
+            color: $texto-oscuro;
+            outline: none;
+            @include transition($transicion-rapida);
+
+            &:focus {
+                background-color: $blanco;
+                border-color: $azul-super;
+                @include box-shadow(0 0 0 3px rgba(11, 63, 193, 0.12));
+            }
+
+            &::placeholder {
+                color: lighten($texto-muted, 15%);
+            }
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+    }
+
+    &__aviso {
+        display: block;
+        font-size: calculate-rem(11px);
+        color: $texto-muted;
+        margin-top: calculate-rem(10px);
+        line-height: 1.4;
+    }
+}

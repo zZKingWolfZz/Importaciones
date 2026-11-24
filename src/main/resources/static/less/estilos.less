@@ -1,0 +1,252 @@
+@azul-super:     #0B3FC1; 
+@azul-noche:     #081D5A; 
+@azul-hover:     #08329E;
+@azul-suave:     #EBF1FD;
+@texto-oscuro:   #1E2229; 
+@texto-muted:    #5F6B7A;
+@gris-fondo:     #F6F8FB;
+@blanco:         #FFFFFF;
+@verde-wsp:      #0E7A3F;
+@borde-color:    #E3E8EE;
+
+@fuente-titulos: 'Poppins', sans-serif;
+@fuente-texto:   'Inter', sans-serif;
+
+@espaciado-base: 16px;
+
+@padding-tarjeta:       (@espaciado-base * 1.5);        
+@padding-banner-vert:   (@espaciado-base * 2.5);        
+@padding-banner-horiz:  ((@espaciado-base * 2.5) + 10px);
+@radio-borde-grande:    (6px + 4px);                    
+@radio-borde-boton:     (4px + 2px);                    
+@ancho-mitad:           (100% / 2);                     
+@espaciado-seccion:     (@espaciado-base * 4);          
+
+.border-radius(@radius: 12px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    -ms-border-radius: @radius;
+    border-radius: @radius;
+}
+
+.box-shadow(@shadow: 0 2px 8px rgba(8, 29, 90, 0.06)) {
+    -webkit-box-shadow: @shadow;
+    -moz-box-shadow: @shadow;
+    box-shadow: @shadow;
+}
+
+.transition(@args: all 0.25s ease) {
+    -webkit-transition: @args;
+    -moz-transition: @args;
+    -o-transition: @args;
+    transition: @args;
+}
+
+.transform(@trans) {
+    -webkit-transform: @trans;
+    -moz-transform: @trans;
+    -ms-transform: @trans;
+    -o-transform: @trans;
+    transform: @trans;
+}
+
+.mensaje-base {
+    padding: 12px 18px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    font-family: @fuente-texto;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-top: 14px;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.mensaje-exito {
+    .mensaje-base;
+    background-color: lighten(@verde-wsp, 50%);
+    color: darken(@verde-wsp, 10%);
+    border-left: 3px solid @verde-wsp;
+}
+
+.mensaje-oferta {
+    .mensaje-base;
+    background-color: @azul-suave;
+    color: @azul-noche;
+    border-left: 3px solid @azul-super;
+}
+
+.badge-base-less {
+    display: inline-block;
+    padding: 3px 10px;
+    font-family: @fuente-titulos;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.badge-super-less {
+    .badge-base-less;
+    background-color: @azul-super;
+    color: @blanco;
+}
+
+.badge-oferta-less {
+    .badge-base-less;
+    background-color: @azul-noche;
+    color: @blanco;
+    -webkit-transform: rotate(-2deg) skew(-4deg);
+    transform: rotate(-2deg) skew(-4deg);
+}
+
+.hero-less {
+    background-color: @azul-noche;
+    color: @blanco;
+    padding: @espaciado-seccion 0;
+    font-family: @fuente-texto;
+
+    .hero-container {
+        display: grid;
+        grid-template-areas: "texto" "imagen";
+        gap: 28px;
+    }
+
+    .hero-texto {
+        h1 {
+            font-family: @fuente-titulos;
+            font-size: 38px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 14px;
+
+            span {
+                color: lighten(@azul-super, 25%);
+            }
+        }
+
+        p {
+            color: lighten(@azul-noche, 65%);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+    }
+
+    .hero-imagen {
+        img {
+            max-width: 100%;
+            height: auto;
+            .border-radius(@radio-borde-grande);
+            .box-shadow(0 12px 30px rgba(0, 0, 0, 0.25));
+            .transition(transform 0.3s ease);
+
+            &:hover {
+                .transform(scale(1.02));
+            }
+        }
+    }
+}
+
+.btn-super-less {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: @azul-super;
+    color: @blanco;
+    font-family: @fuente-titulos;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 20px;
+    .border-radius(@radio-borde-boton);
+    border: none;
+    cursor: pointer;
+    .box-shadow(0 2px 8px rgba(11, 63, 193, 0.25));
+    .transition(all 0.2s ease);
+
+    &:hover {
+        background-color: lighten(@azul-super, 15%);
+        color: @blanco;
+        .transform(translateY(-2px));
+    }
+}
+
+.btn-wsp-less {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: @verde-wsp;
+    color: @blanco;
+    font-family: @fuente-titulos;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 20px;
+    .border-radius(@radio-borde-boton);
+    border: none;
+    cursor: pointer;
+    .box-shadow(0 2px 8px rgba(14, 122, 63, 0.25));
+    .transition(all 0.2s ease);
+
+    &:hover {
+        background-color: darken(@verde-wsp, 8%);
+        color: @blanco;
+        .transform(translateY(-2px));
+    }
+}
+
+.tarjeta-producto-less {
+    background-color: @blanco;
+    border: 1px solid @borde-color;
+    .border-radius(@radio-borde-grande);
+    padding: @padding-tarjeta;
+    .box-shadow(0 2px 8px rgba(8, 29, 90, 0.05));
+    .transition(all 0.25s ease);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &:hover {
+        .transform(translateY(-4px));
+        .box-shadow(0 8px 24px rgba(8, 29, 90, 0.1));
+        border-color: @azul-super;
+    }
+
+    .producto-btn-less {
+        margin-top: auto;
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .catalogo-grid-less {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .catalogo-grid-less {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .catalogo-grid-less {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .hero-less .hero-container {
+        grid-template-areas: "texto imagen";
+        grid-template-columns: 1.1fr 0.9fr;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .catalogo-grid-less {
+        gap: 28px;
+    }
+}

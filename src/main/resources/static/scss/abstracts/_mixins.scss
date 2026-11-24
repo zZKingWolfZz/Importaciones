@@ -1,0 +1,100 @@
+@mixin border-radius($r: 12px) {
+    -webkit-border-radius: $r;
+    -moz-border-radius: $r;
+    -ms-border-radius: $r;
+    border-radius: $r;
+}
+
+@mixin box-shadow($s: 0 4px 14px rgba(11, 27, 92, 0.08)) {
+    -webkit-box-shadow: $s;
+    -moz-box-shadow: $s;
+    box-shadow: $s;
+}
+
+@mixin transition($args...) {
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -o-transition: $args;
+    transition: $args;
+}
+
+@mixin transform($t) {
+    -webkit-transform: $t;
+    -moz-transform: $t;
+    -ms-transform: $t;
+    -o-transform: $t;
+    transform: $t;
+}
+
+@mixin perspective($val: 800px) {
+    -webkit-perspective: $val;
+    -moz-perspective: $val;
+    perspective: $val;
+}
+
+@mixin transform-style($style: preserve-3d) {
+    -webkit-transform-style: $style;
+    -moz-transform-style: $style;
+    transform-style: $style;
+}
+
+@mixin backface-visibility($val: hidden) {
+    -webkit-backface-visibility: $val;
+    -moz-backface-visibility: $val;
+    backface-visibility: $val;
+}
+
+@mixin flex-center {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+@mixin flex-between {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+@mixin flex-column {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+@mixin section-spacing {
+    padding: calculate-rem(80px) 0;
+}
+
+@mixin respond-to($punto) {
+    @if map-has-key($bp, $punto) {
+        $valor: map-get($bp, $punto);
+        @media screen and (min-width: $valor) {
+            @content;
+        }
+    } @else {
+        @warn "El breakpoint '#{$punto}' no es válido. Usa: sm, md, lg, xl.";
+    }
+}
+
+@mixin responsive-max($ancho) {
+    @media screen and (max-width: $ancho) {
+        @content;
+    }
+}
