@@ -1,0 +1,105 @@
+.catalogo-page {
+    padding: calculate-rem(45px) 0 calculate-rem(70px);
+}
+
+.catalog-search {
+    position: relative;
+    max-width: 540px;
+    margin: 0 auto calculate-rem(24px);
+
+    input {
+        width: 100%;
+        padding: calculate-rem(12px) calculate-rem(45px) calculate-rem(12px) calculate-rem(18px);
+        background-color: $blanco;
+        border: 1px solid $borde-color;
+        @include border-radius(6px);
+        font-family: $fuente-texto;
+        font-size: calculate-rem(14px);
+        color: $texto-oscuro;
+        outline: none;
+        @include box-shadow($sombra-suave);
+        @include transition($transicion-rapida);
+
+        &:focus {
+            border-color: $azul-super;
+            @include box-shadow(0 0 0 3px rgba(11, 63, 193, 0.15));
+        }
+    }
+
+    .search-icon {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        @include transform(translateY(-50%));
+        font-size: 16px;
+        color: $texto-muted;
+        pointer-events: none;
+    }
+}
+
+.product-filters,
+.catalogo__filtros {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    gap: calculate-rem(8px);
+    margin-bottom: calculate-rem(36px);
+
+    .filter-button {
+        background-color: $blanco;
+        border: 1px solid $borde-color;
+        color: $texto-oscuro;
+        font-family: $fuente-titulos;
+        font-size: calculate-rem(13px);
+        font-weight: 600;
+        padding: calculate-rem(7px) calculate-rem(16px);
+        @include border-radius(6px);
+        cursor: pointer;
+        @include box-shadow(0 1px 3px rgba(0, 0, 0, 0.04));
+        @include transition($transicion-rapida);
+
+        &:hover {
+            border-color: $azul-super;
+            color: $azul-super;
+            background-color: $azul-suave;
+        }
+
+        &.active {
+            background-color: $azul-super;
+            border-color: $azul-super;
+            color: $blanco;
+            @include box-shadow(0 2px 8px rgba(11, 63, 193, 0.25));
+        }
+    }
+}
+
+.no-products {
+    text-align: center;
+    padding: calculate-rem(40px) calculate-rem(20px);
+    background-color: $blanco;
+    @include border-radius(8px);
+    border: 1px dashed $borde-color;
+    margin-top: calculate-rem(24px);
+
+    p {
+        font-size: calculate-rem(15px);
+        color: $texto-oscuro;
+        font-weight: 600;
+        margin-bottom: calculate-rem(8px);
+    }
+}
+
+.catalog-disclaimer {
+    text-align: center;
+    font-size: calculate-rem(12px);
+    color: $texto-muted;
+    margin-top: calculate-rem(36px);
+}

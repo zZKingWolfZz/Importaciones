@@ -1,0 +1,94 @@
+.btn-custom {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    gap: calculate-rem(8px);
+    font-family: $fuente-titulos;
+    font-size: calculate-rem(14px);
+    font-weight: 600;
+    padding: calculate-rem(10px) calculate-rem(20px);
+    @include border-radius(6px);
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+
+    -webkit-transition-property: -webkit-transform, -webkit-box-shadow, background-color, border-color, color;
+    transition-property: transform, box-shadow, background-color, border-color, color;
+    -webkit-transition-duration: 0.25s;
+    transition-duration: 0.25s;
+    -webkit-transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+
+    &:hover {
+        @include transform(translateY(-2px));
+    }
+
+    &:active {
+        @include transform(translateY(0));
+    }
+}
+
+.btn-super {
+    @extend .btn-custom;
+    background-color: $azul-super;
+    color: $blanco;
+    @include box-shadow(0 2px 8px rgba(11, 63, 193, 0.25));
+
+    &:hover {
+        background-color: $azul-hover;
+        color: $blanco;
+        @include box-shadow(0 4px 14px rgba(11, 63, 193, 0.35));
+    }
+}
+
+.btn-oferta {
+    @extend .btn-custom;
+    background-color: $azul-noche;
+    color: $blanco;
+    border-color: $azul-noche;
+
+    &:hover {
+        background-color: $azul-super;
+        border-color: $azul-super;
+        color: $blanco;
+        @include box-shadow(0 4px 14px rgba(8, 29, 90, 0.25));
+    }
+}
+
+.btn-wsp {
+    @extend .btn-custom;
+    background-color: $verde-wsp;
+    color: $blanco;
+
+    &:hover {
+        background-color: darken($verde-wsp, 8%);
+        color: $blanco;
+        @include box-shadow(0 4px 14px rgba(14, 122, 63, 0.35));
+    }
+}
+
+.btn-outline-super {
+    @extend .btn-custom;
+    background-color: transparent;
+    border-color: $azul-super;
+    color: $azul-super;
+
+    &:hover {
+        background-color: $azul-super;
+        color: $blanco;
+    }
+}
+
+.btn-pulso {
+    -webkit-animation: pulso 2s ease-in-out infinite;
+    animation: pulso 2s ease-in-out infinite;
+}

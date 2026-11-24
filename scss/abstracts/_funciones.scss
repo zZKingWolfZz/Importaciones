@@ -1,0 +1,29 @@
+@function calculate-rem($px, $base: 16px) {
+    
+    @if unit($px) == 'rem' {
+        @return $px;
+    }
+    @if unitless($px) {
+        $px: $px * 1px;
+    }
+    @if unitless($base) {
+        $base: $base * 1px;
+    }
+    @return ($px / $base) * 1rem;
+}
+
+@function color($clave) {
+    @if map-has-key($colores, $clave) {
+        @return map-get($colores, $clave);
+    }
+    @warn "El color '#{$clave}' no existe en el mapa $colores.";
+    @return null;
+}
+
+@function bp($clave) {
+    @if map-has-key($bp, $clave) {
+        @return map-get($bp, $clave);
+    }
+    @warn "El breakpoint '#{$clave}' no existe en el mapa $bp.";
+    @return null;
+}

@@ -1,0 +1,66 @@
+.header-principal {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    background-color: $blanco;
+    border-bottom: 1px solid $borde-color;
+    min-height: 105px;
+    will-change: transform;
+    @include box-shadow(0 2px 10px rgba(8, 29, 90, 0.05));
+
+    &__topbar {
+        background-color: $azul-noche;
+        padding: calculate-rem(6px) 0;
+        font-size: calculate-rem(13px);
+        color: rgba(255, 255, 255, 0.88);
+        min-height: 33px;
+
+        .topbar-content {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            gap: calculate-rem(8px);
+        }
+
+        .topbar-address {
+            display: -webkit-inline-box;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            gap: calculate-rem(6px);
+            font-style: normal;
+            margin: 0;
+
+            .topbar-bullet {
+                color: lighten($azul-super, 25%);
+            }
+        }
+
+        .topbar-links {
+            display: -webkit-inline-box;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            gap: calculate-rem(18px);
+
+            a {
+                color: rgba(255, 255, 255, 0.92);
+                &:hover {
+                    color: lighten($azul-super, 30%);
+                }
+            }
+        }
+    }
+}

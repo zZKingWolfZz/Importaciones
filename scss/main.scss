@@ -1,0 +1,184 @@
+@import 'abstracts/variables';
+@import 'abstracts/funciones';
+@import 'abstracts/mixins';
+
+@import 'base/reset';
+@import 'base/typography';
+@import 'base/utilities';
+
+@import 'layout/header';
+@import 'layout/navigation';
+@import 'layout/grid';
+@import 'layout/footer';
+
+@import 'components/badges';
+@import 'components/buttons';
+@import 'components/forms';
+@import 'components/cards';
+@import 'components/flipcard';
+@import 'components/floating';
+
+@import 'pages/home';
+@import 'pages/catalogo';
+@import 'pages/nosotros';
+@import 'pages/contacto';
+@import 'pages/legal';
+
+@-webkit-keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-35px);
+        transform: translateY(-35px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-35px);
+        transform: translateY(-35px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+@-webkit-keyframes slideInUp {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(40px);
+        transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+@keyframes slideInUp {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(40px);
+        transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+@-webkit-keyframes pulso {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-box-shadow: 0 0 0 0 rgba(11, 63, 193, 0.6);
+        box-shadow: 0 0 0 0 rgba(11, 63, 193, 0.6);
+    }
+    70% {
+        -webkit-transform: scale(1.05);
+        transform: scale(1.05);
+        -webkit-box-shadow: 0 0 0 14px rgba(11, 63, 193, 0);
+        box-shadow: 0 0 0 14px rgba(11, 63, 193, 0);
+    }
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-box-shadow: 0 0 0 0 rgba(11, 63, 193, 0);
+        box-shadow: 0 0 0 0 rgba(11, 63, 193, 0);
+    }
+}
+@keyframes pulso {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-box-shadow: 0 0 0 0 rgba(11, 63, 193, 0.6);
+        box-shadow: 0 0 0 0 rgba(11, 63, 193, 0.6);
+    }
+    70% {
+        -webkit-transform: scale(1.05);
+        transform: scale(1.05);
+        -webkit-box-shadow: 0 0 0 14px rgba(11, 63, 193, 0);
+        box-shadow: 0 0 0 14px rgba(11, 63, 193, 0);
+    }
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-box-shadow: 0 0 0 0 rgba(11, 63, 193, 0);
+        box-shadow: 0 0 0 0 rgba(11, 63, 193, 0);
+    }
+}
+
+@-webkit-keyframes flotar {
+    0%, 100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+    50% {
+        -webkit-transform: translateY(-12px);
+        transform: translateY(-12px);
+    }
+}
+@keyframes flotar {
+    0%, 100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+    50% {
+        -webkit-transform: translateY(-12px);
+        transform: translateY(-12px);
+    }
+}
+
+@supports not (box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1)) {
+    .producto,
+    .product-card,
+    .formulario,
+    .contacto-info-card,
+    .tarjeta-servicio,
+    .flip-card__front,
+    .flip-card__back {
+        border: 2px solid $azul-super !important;
+        outline: 1px solid $azul-noche !important;
+    }
+}
+
+@supports not (display: grid) {
+    .catalogo__grid,
+    .servicios__grid,
+    .nosotros-pilares,
+    .flip-grid {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        gap: 20px;
+
+        & > * {
+            -webkit-box-flex: 1;
+            -ms-flex: 1 1 260px;
+            flex: 1 1 260px;
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        -webkit-animation-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        -webkit-animation-iteration-count: 1 !important;
+        animation-iteration-count: 1 !important;
+        -webkit-transition-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

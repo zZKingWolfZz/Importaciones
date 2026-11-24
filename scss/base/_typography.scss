@@ -1,0 +1,97 @@
+h1, .h1 {
+    font-family: $fuente-titulos;
+    font-weight: 800;
+    font-size: unquote("clamp(#{calculate-rem(32px)}, 3.5vw + 1rem, #{calculate-rem(52px)})");
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    color: $blanco;
+
+    span {
+        color: lighten($azul-super, 25%);
+    }
+}
+
+h2, .h2 {
+    font-family: $fuente-titulos;
+    font-weight: 700;
+    font-size: unquote("clamp(#{calculate-rem(24px)}, 2vw + 0.8rem, #{calculate-rem(36px)})");
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: $azul-noche;
+
+    span {
+        color: $azul-super;
+    }
+}
+
+h3, .h3 {
+    font-family: $fuente-titulos;
+    font-weight: 700;
+    font-size: unquote("clamp(#{calculate-rem(18px)}, 1.2vw + 0.6rem, #{calculate-rem(22px)})");
+    line-height: 1.35;
+    color: $texto-oscuro;
+}
+
+h4, .h4 {
+    font-family: $fuente-titulos;
+    font-weight: 600;
+    font-size: calculate-rem(16px);
+    line-height: 1.4;
+    color: $texto-oscuro;
+}
+
+p {
+    font-family: $fuente-texto;
+    font-size: calculate-rem(15px);
+    color: $texto-muted;
+    line-height: 1.65;
+    margin-bottom: calculate-rem(14px);
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: calculate-rem(42px);
+
+    &__eyebrow {
+        display: inline-block;
+        color: $azul-super;
+        font-family: $fuente-titulos;
+        font-size: calculate-rem(12px);
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: calculate-rem(6px);
+    }
+
+    &__title {
+        color: $azul-noche;
+        margin-bottom: calculate-rem(10px);
+    }
+
+    &__desc {
+        color: $texto-muted;
+        max-width: 600px;
+        margin: 0 auto;
+        font-size: calculate-rem(15px);
+    }
+}
+
+data.precio-actual {
+    font-family: $fuente-titulos;
+    font-weight: 800;
+    font-size: calculate-rem(22px);
+    color: $azul-super;
+}
+
+data.precio-anterior {
+    font-family: $fuente-texto;
+    font-size: calculate-rem(13px);
+    color: $texto-muted;
+    text-decoration: line-through;
+}
+
+time {
+    font-family: $fuente-texto;
+    font-size: calculate-rem(13px);
+    color: $texto-muted;
+}

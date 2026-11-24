@@ -1,0 +1,159 @@
+.hero-section {
+    background: linear-gradient(135deg, $azul-noche 0%, $azul-super 100%);
+    color: $blanco;
+    padding: calculate-rem(60px) 0 calculate-rem(70px);
+    overflow: hidden;
+    position: relative;
+
+    .hero__texto,
+    .hero-text {
+        -webkit-animation: fadeInDown 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+        animation: fadeInDown 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+
+        .hero__badge-ubicacion {
+            display: -webkit-inline-box;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            gap: calculate-rem(8px);
+            background-color: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            padding: calculate-rem(5px) calculate-rem(12px);
+            @include border-radius(4px);
+            font-family: $fuente-titulos;
+            font-size: calculate-rem(11px);
+            font-weight: 700;
+            color: $blanco;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: calculate-rem(14px);
+        }
+
+        h1 {
+            margin-bottom: calculate-rem(14px);
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.88);
+            font-size: calculate-rem(16px);
+            max-width: 500px;
+            margin-bottom: calculate-rem(24px);
+            line-height: 1.6;
+        }
+
+        .hero__acciones {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            gap: calculate-rem(12px);
+        }
+    }
+
+    .hero__imagen,
+    .hero-image {
+        -webkit-animation: flotar 4s ease-in-out infinite;
+        animation: flotar 4s ease-in-out infinite;
+
+        picture,
+        img {
+            width: 100%;
+            height: 360px;
+            object-fit: cover;
+            @include border-radius(12px);
+            @include box-shadow(0 15px 35px rgba(8, 29, 90, 0.3));
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            @include transition($transicion-normal);
+
+            &:hover {
+                @include transform(scale(1.02));
+            }
+        }
+    }
+}
+
+.offers-section {
+    padding: calculate-rem(50px) 0;
+    background-color: $gris-fondo;
+
+    .offers-banner {
+        position: relative;
+        overflow: hidden;
+        background-color: $azul-noche;
+        color: $blanco;
+        padding: calculate-rem(40px) calculate-rem(45px);
+        @include border-radius(12px);
+        @include box-shadow($sombra-media);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        gap: calculate-rem(24px);
+
+        .offers-text {
+            max-width: 580px;
+            z-index: 2;
+
+            span {
+                color: lighten($azul-super, 30%);
+                font-family: $fuente-titulos;
+                font-size: calculate-rem(11px);
+                font-weight: 700;
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+            }
+
+            h2 {
+                color: $blanco;
+                margin: calculate-rem(8px) 0 calculate-rem(10px);
+                font-size: calculate-rem(26px);
+            }
+
+            p {
+                color: rgba(255, 255, 255, 0.85);
+                margin-bottom: calculate-rem(18px);
+                font-size: calculate-rem(14px);
+            }
+        }
+
+        .offers-brand-badge {
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: calculate-rem(20px) calculate-rem(28px);
+            @include border-radius(8px);
+            text-align: center;
+
+            .badge-title {
+                display: block;
+                font-family: $fuente-titulos;
+                font-size: calculate-rem(28px);
+                font-weight: 800;
+                color: $blanco;
+            }
+
+            .badge-sub {
+                display: block;
+                font-size: calculate-rem(12px);
+                color: rgba(255, 255, 255, 0.7);
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+        }
+    }
+}

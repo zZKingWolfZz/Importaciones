@@ -1,0 +1,87 @@
+.hero {
+    display: grid;
+    
+    grid-template-areas:
+        "texto"
+        "imagen";
+    gap: calculate-rem(36px);
+    align-items: center;
+
+    &__texto {
+        grid-area: texto;
+        z-index: 2;
+    }
+
+    &__imagen {
+        grid-area: imagen;
+        position: relative;
+        z-index: 1;
+    }
+
+    @include respond-to('lg') {
+        grid-template-areas: "texto imagen";
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: calculate-rem(50px);
+    }
+}
+
+.catalogo__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: calculate-rem(28px);
+    justify-items: stretch;
+    align-items: stretch;
+
+    &--densa {
+        grid-auto-flow: row dense;
+        grid-auto-rows: minmax(100px, auto);
+    }
+
+    @include respond-to('xl') {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: calculate-rem(32px);
+    }
+}
+
+.producto--destacado-doble {
+    @include respond-to('lg') {
+        grid-column: 1 / 3; 
+    }
+}
+
+.servicios__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: calculate-rem(24px);
+
+    @include respond-to('sm') {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond-to('lg') {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.contacto__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: calculate-rem(36px);
+    align-items: start;
+
+    @include respond-to('lg') {
+        grid-template-columns: 1fr 1.25fr;
+        gap: calculate-rem(50px);
+    }
+}
+
+.legal__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: calculate-rem(32px);
+
+    @include respond-to('lg') {
+        grid-template-columns: 280px 1fr;
+        gap: calculate-rem(48px);
+    }
+}
